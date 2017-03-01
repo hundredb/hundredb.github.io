@@ -150,12 +150,7 @@
             tempBoundingRect.height = Number(element.getAttribute('WidgetHeight'));
         } else {
             tempBoundingRect = element.getBoundingClientRect();
-            var jElement = $(element);
-            position = jElement.position();
-            if(jElement.css('position') == 'fixed') {
-                position.left += Number(jElement.css('margin-left').replace("px", ""));
-                position.top += Number(jElement.css('margin-top').replace("px", ""));
-            }
+            position = $(element).position();
         }
 
         var layers = $ax('#' + widgetId).getParents(true, ['layer'])[0];

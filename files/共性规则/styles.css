@@ -1,0 +1,40 @@
+﻿body {
+  margin:0px;
+  background-image:none;
+  position:static;
+  left:auto;
+  width:606px;
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+#base {
+  position:absolute;
+  z-index:0;
+}
+#u736_img {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:544px;
+  height:201px;
+}
+#u736 {
+  position:absolute;
+  left:62px;
+  top:32px;
+  width:544px;
+  height:201px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  font-size:16px;
+  color:#FF0000;
+}
+#u737 {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:544px;
+  word-wrap:break-word;
+}

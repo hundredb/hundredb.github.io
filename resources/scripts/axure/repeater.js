@@ -264,7 +264,6 @@ $axure.internal(function($ax) {
             repeaterSize.height += borderWidth * 2;
             $jobj(repeaterId).css(repeaterSize);
 
-            // TODO: Should be able to combine this with initialization done in pregen items. Just need to have ids and template ids be the same.
             for(var i = 0; i < ids.length; i++) $ax.initializeObjectEvents($ax('#' + ids[i]), true);
         }
 
@@ -671,15 +670,12 @@ $axure.internal(function($ax) {
             var oldThis = eventInfo.thiswidget;
             var oldItem = eventInfo.item;
 
-            var idToWidgetInfo = {};
-
             outer:
             for(var i = 1; i <= data.length; i++) {
                 for(var j = 0; j < filters.length; j++) {
                     eventInfo.targetElement = _createElementId(repeaterId, i);
                     eventInfo.srcElement = filters[j].thisId;
-                    if(!idToWidgetInfo[eventInfo.srcElement]) idToWidgetInfo[eventInfo.srcElement] = $ax.getWidgetInfo(eventInfo.srcElement);
-                    eventInfo.thiswidget = idToWidgetInfo[eventInfo.srcElement];
+                    eventInfo.thiswidget = $ax.getWidgetInfo(eventInfo.srcElement);
                     eventInfo.item = $ax.getItemInfo(eventInfo.srcElement);
 
                     if($ax.expr.evaluateExpr(filters[j].filter, eventInfo) != 'true') continue outer;
@@ -1492,9 +1488,7 @@ $axure.internal(function($ax) {
         jObj.css('width', width + 'px');
 
         var panelLeft = percentPanelToLeftCache[elementId];
-        var stateParent = jObj;
-        while(stateParent.children()[0].id.indexOf($ax.visibility.CONTAINER_SUFFIX) != -1) stateParent = stateParent.children();
-        var stateChildrenQuery = stateParent.children('.panel_state');
+        var stateChildrenQuery = jObj.children('.panel_state');
         stateChildrenQuery.css('width', width + 'px');
 
         if(obj.fixedHorizontal == 'center')

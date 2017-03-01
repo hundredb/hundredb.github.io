@@ -388,8 +388,7 @@ $axure.internal(function($ax) {
         links.style.left = left;
         $ax.visibility.SetVisible(links, true);
         $ax.legacy.BringToFront(linksId, true);
-        // Switch to using jquery if this is still needed. Really old legacy code, likely for a browser no longer supported. 
-        //$ax.legacy.RefreshScreen();
+        $ax.legacy.RefreshScreen();
     };
 
 
@@ -1414,9 +1413,7 @@ $axure.internal(function($ax) {
 
         // Make sure key events for page are initialized first. That way they will update the value of key pressed before any other events occur.
         _event.initKeyEvents($(window));
-
-        // Anything with an item id is in a repeater and should be handled by that repeater.
-        _initializeObjectEvents($ax(function(obj, elementId) { return !$ax.repeater.getItemIdFromElementId(elementId); }));
+        _initializeObjectEvents($ax('*'));
 
         //finally, process the pageload
         _pageLoad();
