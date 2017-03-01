@@ -1,0 +1,610 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>佣金算法详情</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/佣金算法详情/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/佣金算法详情/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3722" class="ax_default _文本框">
+        <input id="u3722_input" type="text" value="M03" disabled/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3723" class="ax_default _文本段落">
+        <div id="u3723_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3724" class="text" style="visibility: visible;">
+          <p><span>算法编号：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3725" class="ax_default _文本框">
+        <input id="u3725_input" type="text" value="订单金额*(佣金率 + (产品正常定价 - 资金定价) * 资金利差转佣金比例)" disabled/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3726" class="ax_default _文本段落">
+        <div id="u3726_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3727" class="text" style="visibility: visible;">
+          <p><span>算法描述：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3728" class="ax_default _文本框">
+        <input id="u3728_input" type="text" value="min((V1 + (V2 - V3) * V4), V5) * V6" disabled/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3729" class="ax_default _文本段落">
+        <div id="u3729_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3730" class="text" style="visibility: visible;">
+          <p><span>计算公式：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (表格) -->
+      <div id="u3731" class="ax_default _表格">
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3732" class="ax_default _单元格">
+          <img id="u3732_img" class="img " src="images/设置费率（子页面）-step3/u1344.png"/>
+          <!-- Unnamed () -->
+          <div id="u3733" class="text" style="visibility: visible;">
+            <p><span>变量编号</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3734" class="ax_default _单元格">
+          <img id="u3734_img" class="img " src="images/佣金算法详情/u3734.png"/>
+          <!-- Unnamed () -->
+          <div id="u3735" class="text" style="visibility: visible;">
+            <p><span>变量描述</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3736" class="ax_default _单元格">
+          <img id="u3736_img" class="img " src="images/录入销售控制要素（子页面）-step2/u945.png"/>
+          <!-- Unnamed () -->
+          <div id="u3737" class="text" style="visibility: visible;">
+            <p><span>参考值</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3738" class="ax_default _单元格">
+          <img id="u3738_img" class="img " src="images/录入新产品（子页面）-step1/u753.png"/>
+          <!-- Unnamed () -->
+          <div id="u3739" class="text" style="visibility: visible;">
+            <p><span>固定值</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3740" class="ax_default _单元格">
+          <img id="u3740_img" class="img " src="images/佣金算法详情/u3740.png"/>
+          <!-- Unnamed () -->
+          <div id="u3741" class="text" style="visibility: visible;">
+            <p><span>由产品定义</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3742" class="ax_default _单元格">
+          <img id="u3742_img" class="img " src="images/设置费率（子页面）-step3/u1354.png"/>
+          <!-- Unnamed () -->
+          <div id="u3743" class="text" style="visibility: visible;">
+            <p><span>V1</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3744" class="ax_default _单元格">
+          <img id="u3744_img" class="img " src="images/佣金算法详情/u3744.png"/>
+          <!-- Unnamed () -->
+          <div id="u3745" class="text" style="visibility: visible;">
+            <p><span>佣金率</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3746" class="ax_default _单元格">
+          <img id="u3746_img" class="img " src="images/佣金算法详情/u3746.png"/>
+          <!-- Unnamed () -->
+          <div id="u3747" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3748" class="ax_default _单元格">
+          <img id="u3748_img" class="img " src="images/录入新产品（子页面）-step1/u763.png"/>
+          <!-- Unnamed () -->
+          <div id="u3749" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3750" class="ax_default _单元格">
+          <img id="u3750_img" class="img " src="images/佣金算法详情/u3750.png"/>
+          <!-- Unnamed () -->
+          <div id="u3751" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3752" class="ax_default _单元格">
+          <img id="u3752_img" class="img " src="images/设置费率（子页面）-step3/u1354.png"/>
+          <!-- Unnamed () -->
+          <div id="u3753" class="text" style="visibility: visible;">
+            <p><span>V2</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3754" class="ax_default _单元格">
+          <img id="u3754_img" class="img " src="images/佣金算法详情/u3744.png"/>
+          <!-- Unnamed () -->
+          <div id="u3755" class="text" style="visibility: visible;">
+            <p><span>产品正常定价</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3756" class="ax_default _单元格">
+          <img id="u3756_img" class="img " src="images/佣金算法详情/u3746.png"/>
+          <!-- Unnamed () -->
+          <div id="u3757" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3758" class="ax_default _单元格">
+          <img id="u3758_img" class="img " src="images/录入新产品（子页面）-step1/u763.png"/>
+          <!-- Unnamed () -->
+          <div id="u3759" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3760" class="ax_default _单元格">
+          <img id="u3760_img" class="img " src="images/佣金算法详情/u3750.png"/>
+          <!-- Unnamed () -->
+          <div id="u3761" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3762" class="ax_default _单元格">
+          <img id="u3762_img" class="img " src="images/设置费率（子页面）-step3/u1354.png"/>
+          <!-- Unnamed () -->
+          <div id="u3763" class="text" style="visibility: visible;">
+            <p><span>V3</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3764" class="ax_default _单元格">
+          <img id="u3764_img" class="img " src="images/佣金算法详情/u3744.png"/>
+          <!-- Unnamed () -->
+          <div id="u3765" class="text" style="visibility: visible;">
+            <p><span>资金定价</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3766" class="ax_default _单元格">
+          <img id="u3766_img" class="img " src="images/佣金算法详情/u3746.png"/>
+          <!-- Unnamed () -->
+          <div id="u3767" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3768" class="ax_default _单元格">
+          <img id="u3768_img" class="img " src="images/录入新产品（子页面）-step1/u763.png"/>
+          <!-- Unnamed () -->
+          <div id="u3769" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3770" class="ax_default _单元格">
+          <img id="u3770_img" class="img " src="images/佣金算法详情/u3750.png"/>
+          <!-- Unnamed () -->
+          <div id="u3771" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3772" class="ax_default _单元格">
+          <img id="u3772_img" class="img " src="images/设置费率（子页面）-step3/u1354.png"/>
+          <!-- Unnamed () -->
+          <div id="u3773" class="text" style="visibility: visible;">
+            <p><span>V4</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3774" class="ax_default _单元格">
+          <img id="u3774_img" class="img " src="images/佣金算法详情/u3744.png"/>
+          <!-- Unnamed () -->
+          <div id="u3775" class="text" style="visibility: visible;">
+            <p><span>资金利差转佣金比例</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3776" class="ax_default _单元格">
+          <img id="u3776_img" class="img " src="images/佣金算法详情/u3746.png"/>
+          <!-- Unnamed () -->
+          <div id="u3777" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3778" class="ax_default _单元格">
+          <img id="u3778_img" class="img " src="images/录入新产品（子页面）-step1/u763.png"/>
+          <!-- Unnamed () -->
+          <div id="u3779" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3780" class="ax_default _单元格">
+          <img id="u3780_img" class="img " src="images/佣金算法详情/u3750.png"/>
+          <!-- Unnamed () -->
+          <div id="u3781" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3782" class="ax_default _单元格">
+          <img id="u3782_img" class="img " src="images/设置费率（子页面）-step3/u1354.png"/>
+          <!-- Unnamed () -->
+          <div id="u3783" class="text" style="visibility: visible;">
+            <p><span>V5</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3784" class="ax_default _单元格">
+          <img id="u3784_img" class="img " src="images/佣金算法详情/u3744.png"/>
+          <!-- Unnamed () -->
+          <div id="u3785" class="text" style="visibility: visible;">
+            <p><span>佣金率上限</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3786" class="ax_default _单元格">
+          <img id="u3786_img" class="img " src="images/佣金算法详情/u3746.png"/>
+          <!-- Unnamed () -->
+          <div id="u3787" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3788" class="ax_default _单元格">
+          <img id="u3788_img" class="img " src="images/录入新产品（子页面）-step1/u763.png"/>
+          <!-- Unnamed () -->
+          <div id="u3789" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3790" class="ax_default _单元格">
+          <img id="u3790_img" class="img " src="images/佣金算法详情/u3750.png"/>
+          <!-- Unnamed () -->
+          <div id="u3791" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3792" class="ax_default _单元格">
+          <img id="u3792_img" class="img " src="images/设置费率（子页面）-step3/u1384.png"/>
+          <!-- Unnamed () -->
+          <div id="u3793" class="text" style="visibility: visible;">
+            <p><span>V6</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3794" class="ax_default _单元格">
+          <img id="u3794_img" class="img " src="images/佣金算法详情/u3794.png"/>
+          <!-- Unnamed () -->
+          <div id="u3795" class="text" style="visibility: visible;">
+            <p><span>订单金额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3796" class="ax_default _单元格">
+          <img id="u3796_img" class="img " src="images/佣金算法详情/u3796.png"/>
+          <!-- Unnamed () -->
+          <div id="u3797" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3798" class="ax_default _单元格">
+          <img id="u3798_img" class="img " src="images/录入新产品（子页面）-step1/u783.png"/>
+          <!-- Unnamed () -->
+          <div id="u3799" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3800" class="ax_default _单元格">
+          <img id="u3800_img" class="img " src="images/佣金算法详情/u3800.png"/>
+          <!-- Unnamed () -->
+          <div id="u3801" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u3802" class="ax_default line">
+        <img id="u3802_img" class="img " src="images/首页/u93.png"/>
+        <!-- Unnamed () -->
+        <div id="u3803" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3804" class="ax_default _三级标题">
+        <div id="u3804_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3805" class="text" style="visibility: visible;">
+          <p><span>变量</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3806" class="ax_default _下拉列表框">
+        <select id="u3806_input" disabled>
+          <option value=" ">&nbsp;</option>
+          <option value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option value="订单预期收益率">订单预期收益率</option>
+          <option selected value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3807" class="ax_default _下拉列表框">
+        <select id="u3807_input" disabled>
+          <option selected value=" ">&nbsp;</option>
+          <option value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option value="订单预期收益率">订单预期收益率</option>
+          <option value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3808" class="ax_default _下拉列表框">
+        <select id="u3808_input" disabled>
+          <option value=" ">&nbsp;</option>
+          <option value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option selected value="订单预期收益率">订单预期收益率</option>
+          <option value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3809" class="ax_default _下拉列表框">
+        <select id="u3809_input" disabled>
+          <option selected value=" ">&nbsp;</option>
+          <option value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option value="订单预期收益率">订单预期收益率</option>
+          <option value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3810" class="ax_default _下拉列表框">
+        <select id="u3810_input" disabled>
+          <option selected value=" ">&nbsp;</option>
+          <option value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option value="订单预期收益率">订单预期收益率</option>
+          <option value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3811" class="ax_default _下拉列表框">
+        <select id="u3811_input" disabled>
+          <option value=" ">&nbsp;</option>
+          <option selected value="订单金额">订单金额</option>
+          <option value="订单认购费">订单认购费</option>
+          <option value="订单预期收益率">订单预期收益率</option>
+          <option value="产品预期收益率">产品预期收益率</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3812" class="ax_default _文本框">
+        <input id="u3812_input" type="text" value="0.00161" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3813" class="ax_default _文本框">
+        <input id="u3813_input" type="text" value="" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3814" class="ax_default _文本框">
+        <input id="u3814_input" type="text" value="" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3815" class="ax_default _文本框">
+        <input id="u3815_input" type="text" value="0.4" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3816" class="ax_default _文本框">
+        <input id="u3816_input" type="text" value="0.0045" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3817" class="ax_default _文本框">
+        <input id="u3817_input" type="text" value="" disabled/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3818" class="ax_default checkbox">
+        <label for="u3818_input">
+          <!-- Unnamed () -->
+          <div id="u3819" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3818_input" type="checkbox" value="checkbox" disabled checked/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3820" class="ax_default checkbox">
+        <label for="u3820_input">
+          <!-- Unnamed () -->
+          <div id="u3821" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3820_input" type="checkbox" value="checkbox" disabled/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3822" class="ax_default checkbox">
+        <label for="u3822_input">
+          <!-- Unnamed () -->
+          <div id="u3823" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3822_input" type="checkbox" value="checkbox" disabled/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3824" class="ax_default checkbox">
+        <label for="u3824_input">
+          <!-- Unnamed () -->
+          <div id="u3825" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3824_input" type="checkbox" value="checkbox" disabled checked/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3826" class="ax_default checkbox">
+        <label for="u3826_input">
+          <!-- Unnamed () -->
+          <div id="u3827" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3826_input" type="checkbox" value="checkbox" disabled checked/>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u3828" class="ax_default checkbox">
+        <label for="u3828_input">
+          <!-- Unnamed () -->
+          <div id="u3829" class="text" style="visibility: visible;">
+            <p><span>由使用方定义</span></p>
+          </div>
+        </label>
+        <input id="u3828_input" type="checkbox" value="checkbox" disabled/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3830" class="ax_default _文本框">
+        <input id="u3830_input" type="text" value="佣金算法三" disabled/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3831" class="ax_default _文本段落">
+        <div id="u3831_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3832" class="text" style="visibility: visible;">
+          <p><span>算法名称：</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
