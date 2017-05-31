@@ -4,65 +4,57 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>5-31日内容,项目进度 | 项目开发小站</title>
+    <title>关于weak的不小心使用 | 项目开发小站</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Hundred Wang">
     
 
     
-    <meta name="description" content="5-31日内容,进度内容
-前言
-目前客户功能除了个人信息,银行卡,风险测评已经完成
-穆良完成了资产基本的cell
-文俊在实现其余界面的功能组建的开发
+    <meta name="description" content="关于weak的不小心使用
+前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
 
-1.主要的内容
-客户(中小)
-订单主流程(主要)
-产品(第二)
+发送网络请求,没有收到回馈的信息
+点击事件没有反应
 
-不是合理的设计
-图片上下传
 
-12345678910111213141516171819202122232425262728293031321. 上传=&amp;gt;key(成功之后)2.">
+正文问题查找的过程
+
+由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
+所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5-31日内容,项目进度">
-<meta property="og:url" content="http://www.hundredone.win/2017/06/01/项目进度与会议/5-31日内容,项目进度/index.html">
+<meta property="og:title" content="关于weak的不小心使用">
+<meta property="og:url" content="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于weak的不小心使用/index.html">
 <meta property="og:site_name" content="项目开发小站">
-<meta property="og:description" content="5-31日内容,进度内容
-前言
-目前客户功能除了个人信息,银行卡,风险测评已经完成
-穆良完成了资产基本的cell
-文俊在实现其余界面的功能组建的开发
+<meta property="og:description" content="关于weak的不小心使用
+前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
 
-1.主要的内容
-客户(中小)
-订单主流程(主要)
-产品(第二)
+发送网络请求,没有收到回馈的信息
+点击事件没有反应
 
-不是合理的设计
-图片上下传
 
-12345678910111213141516171819202122232425262728293031321. 上传=&amp;gt;key(成功之后)2.">
-<meta property="og:updated_time" content="2017-05-31T01:22:25.000Z">
+正文问题查找的过程
+
+由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
+所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+<meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/Snip20170531_1.png">
+<meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/3.gif">
+<meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/2.gif">
+<meta property="og:updated_time" content="2017-05-31T07:21:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5-31日内容,项目进度">
-<meta name="twitter:description" content="5-31日内容,进度内容
-前言
-目前客户功能除了个人信息,银行卡,风险测评已经完成
-穆良完成了资产基本的cell
-文俊在实现其余界面的功能组建的开发
+<meta name="twitter:title" content="关于weak的不小心使用">
+<meta name="twitter:description" content="关于weak的不小心使用
+前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
 
-1.主要的内容
-客户(中小)
-订单主流程(主要)
-产品(第二)
+发送网络请求,没有收到回馈的信息
+点击事件没有反应
 
-不是合理的设计
-图片上下传
 
-12345678910111213141516171819202122232425262728293031321. 上传=&amp;gt;key(成功之后)2.">
+正文问题查找的过程
+
+由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
+所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+<meta name="twitter:image" content="http://okbqg56m9.bkt.clouddn.com/Snip20170531_1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="项目开发小站" type="application/atom+xml">
@@ -123,7 +115,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/06/01/项目进度与会议/5-31日内容,项目进度/" title="5-31日内容,项目进度" itemprop="url">5-31日内容,项目进度</a>
+      <a href="/2017/06/01/自己踩坑的点/关于weak的不小心使用/" title="关于weak的不小心使用" itemprop="url">关于weak的不小心使用</a>
   </h1>
   <p class="article-author">By
        
@@ -139,32 +131,23 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-主要的内容"><span class="toc-number">2.</span> <span class="toc-text">1.主要的内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不是合理的设计"><span class="toc-number">3.</span> <span class="toc-text">不是合理的设计</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
 		
 		</div>
 		
-		<p>5-31日内容,进度内容</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol>
-<li>目前客户功能除了个人信息,银行卡,风险测评已经完成</li>
-<li>穆良完成了资产基本的cell</li>
-<li>文俊在实现其余界面的功能组建的开发</li>
-</ol>
-<h1 id="1-主要的内容"><a href="#1-主要的内容" class="headerlink" title="1.主要的内容"></a>1.主要的内容</h1><ol>
-<li>客户(中小)</li>
-<li>订单主流程(主要)</li>
-<li>产品(第二)</li>
-</ol>
-<h1 id="不是合理的设计"><a href="#不是合理的设计" class="headerlink" title="不是合理的设计"></a>不是合理的设计</h1><ol>
-<li>图片上下传</li>
-</ol>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. 上传=&gt;key(成功之后)</div><div class="line"><span class="number">2</span>. 具体到某个功能,就直接把key,放在</div><div class="line"></div><div class="line"></div><div class="line">/*</div><div class="line">    fileId : <span class="type">Fc51eb33f21b043efae1985553018ae11</span>,</div><div class="line">	refObjectType : 0,                              //外键类型</div><div class="line">	readKey : <span class="type">Rd2be929db61346239b6b8cdf1186d0be</span>,</div><div class="line">	recordId : 775293101<span class="type">cfc497a92155539461c4570</span>,</div><div class="line">	flagDeleted : <span class="type">N</span>,</div><div class="line">	refObjectNo : <span class="type">c330248d9e044e279510a40564ebdb6e</span>, //外键</div><div class="line">	fileSize : 1435417,</div><div class="line">	fileType : <span class="type">PNG</span>,</div><div class="line">	uploadOn : 20170511</div><div class="line"> */</div><div class="line">+(NSDictionary *)onLoadImgDicWithUmNo:(NSString *)umNo andImg:(UIImage *)img</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (umNo&amp;&amp;img) &#123;</div><div class="line">        NSData *imageData =  [self returnDataCompressedImageToLimitSizeOfKB:<span class="number">0.5</span>*<span class="number">1024</span> image:img]; //UIImageJPEGRepresentation(image, <span class="number">1</span>);</div><div class="line">//        NSInteger length = [imageData length]/<span class="number">1024</span>;       //不用转换成KB</div><div class="line">        NSInteger length = [imageData length];</div><div class="line">        <span class="keyword">return</span> @&#123;</div><div class="line">                 @<span class="string">"fileId"</span>:@<span class="string">""</span>,</div><div class="line">                 @<span class="string">"readKey"</span>:@<span class="string">""</span>,</div><div class="line">                 @<span class="string">"fileSize"</span>:[NSString stringWithFormat:@<span class="string">"%ld"</span>,length],</div><div class="line">                 @<span class="string">"fileType"</span>:@<span class="string">"PNG"</span>,</div><div class="line">                 @<span class="string">"uploadBy"</span>:umNo,</div><div class="line">                 @<span class="string">"uploadOn"</span>:[ConstantOrder reqTimeWithShow:[<span class="keyword">Constant</span> dateNow]],</div><div class="line">                 &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> @&#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p>关于weak的不小心使用</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于在<code>ProductCustomInfoViewController</code>里面的vc使用了weak,导致了两个问题</p>
 <ol>
-<li>项目进度:</li>
+<li>发送网络请求,没有收到回馈的信息</li>
+<li>点击事件没有反应</li>
 </ol>
-<ul>
-<li>20号以前</li>
-<li>客户周六</li>
-</ul>
+<p><img src="http://okbqg56m9.bkt.clouddn.com/Snip20170531_1.png" alt=""></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>问题查找的过程</p>
+<ol>
+<li>由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了</li>
+<li>所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复制导致的</li>
+</ol>
+<p><img src="http://okbqg56m9.bkt.clouddn.com/3.gif" alt="使用weak例子"><br><img src="http://okbqg56m9.bkt.clouddn.com/2.gif" alt="使用strong"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -172,13 +155,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/wss会议/">wss会议</a>
+  <a class="article-category-link" href="/categories/踩坑/">踩坑</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/wss会议/">wss会议</a>
+  <span></span> <a href="/tags/踩坑/">踩坑</a>
   </div>
 
 </div>
@@ -187,7 +170,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.hundredone.win/2017/06/01/项目进度与会议/5-31日内容,项目进度/" data-title="5-31日内容,项目进度 | 项目开发小站" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于weak的不小心使用/" data-title="关于weak的不小心使用 | 项目开发小站" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -200,11 +183,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/06/01/项目进度与会议/5-31日内容,项目进度/" title="5-31日内容,项目进度">
+  <strong>上一篇：</strong><br/>
+  <span>
+  5-31日内容,项目进度</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2017/06/01/自己踩坑的点/关于weak的不小心使用/"  title="关于weak的不小心使用">
+<a href="/2017/05/31/开发要点/info组件的使用/"  title="info组件的使用">
  <strong>下一篇：</strong><br/> 
- <span>关于weak的不小心使用
+ <span>info组件的使用
 </span>
 </a>
 </div>
@@ -213,7 +204,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/06/01/项目进度与会议/5-31日内容,项目进度/" data-title="5-31日内容,项目进度" data-url="http://www.hundredone.win/2017/06/01/项目进度与会议/5-31日内容,项目进度/"></div>
+	<div class="ds-thread" data-thread-key="2017/06/01/自己踩坑的点/关于weak的不小心使用/" data-title="关于weak的不小心使用" data-url="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于weak的不小心使用/"></div>
 </section>
 
 
@@ -223,7 +214,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-主要的内容"><span class="toc-number">2.</span> <span class="toc-text">1.主要的内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不是合理的设计"><span class="toc-number">3.</span> <span class="toc-text">不是合理的设计</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
  
   </div>
 
