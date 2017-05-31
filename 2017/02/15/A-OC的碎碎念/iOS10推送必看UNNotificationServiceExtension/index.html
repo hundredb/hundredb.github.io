@@ -1,0 +1,676 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS10推送必看UNNotificationServiceExtension | 香蕉的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Hundred Wang">
+    
+
+    
+    <meta name="description" content="更新晚啦，我要先跟大家说声抱歉哈~如果大家还没有看我的这两篇文章，建议还是先阅读一下，循序渐进么~文章链接如下:
+
+iOS开发 iOS10推送必看(基础篇)
+iOS开发 iOS10推送必看(高阶1)这次的最后，终于有demo咯~在这篇文章，我会给大家讲一讲更高级一点的，定制化更高的远程通知。其中会补充我之前没讲的远程推送（多媒体）通知，以及UNNotificationServiceExtensio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS10推送必看UNNotificationServiceExtension">
+<meta property="og:url" content="http://www.hundredone.win/2017/02/15/A-OC的碎碎念/iOS10推送必看UNNotificationServiceExtension/index.html">
+<meta property="og:site_name" content="香蕉的技术博客">
+<meta property="og:description" content="更新晚啦，我要先跟大家说声抱歉哈~如果大家还没有看我的这两篇文章，建议还是先阅读一下，循序渐进么~文章链接如下:
+
+iOS开发 iOS10推送必看(基础篇)
+iOS开发 iOS10推送必看(高阶1)这次的最后，终于有demo咯~在这篇文章，我会给大家讲一讲更高级一点的，定制化更高的远程通知。其中会补充我之前没讲的远程推送（多媒体）通知，以及UNNotificationServiceExtensio">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-1c39520d04be69ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-42ed2513c18e3e85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-4017ba4d6394f526.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-6537913777ad642b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-88959f6a2d30f2cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-84416c3bd36cdc44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-5d8c59fc75ab2df5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-711625601b5308dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-0ed472f65364dc08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-9173a1a39e13bf0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-aa137e5f5a38c6b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3220449-78271b3de56486b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-02-17T01:42:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS10推送必看UNNotificationServiceExtension">
+<meta name="twitter:description" content="更新晚啦，我要先跟大家说声抱歉哈~如果大家还没有看我的这两篇文章，建议还是先阅读一下，循序渐进么~文章链接如下:
+
+iOS开发 iOS10推送必看(基础篇)
+iOS开发 iOS10推送必看(高阶1)这次的最后，终于有demo咯~在这篇文章，我会给大家讲一讲更高级一点的，定制化更高的远程通知。其中会补充我之前没讲的远程推送（多媒体）通知，以及UNNotificationServiceExtensio">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3220449-1c39520d04be69ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+    
+    <link rel="alternative" href="/atom.xml" title="香蕉的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/fauthor32.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author114.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/author114.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="香蕉的技术博客" title="香蕉的技术博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="香蕉的技术博客">香蕉的技术博客</a></h1>
+				<h2 class="blog-motto">用卑微的视角,为浩瀚的科技大海共享一份绵薄之力</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 244624813535589000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/15/A-OC的碎碎念/iOS10推送必看UNNotificationServiceExtension/" title="iOS10推送必看UNNotificationServiceExtension" itemprop="url">iOS10推送必看UNNotificationServiceExtension</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Hundred Wang" target="_blank" itemprop="author">Hundred Wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-15T02:49:50.000Z" itemprop="datePublished"> 发表于 2017-02-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、UNNotificationServiceExtension"><span class="toc-number">1.</span> <span class="toc-text">1、UNNotificationServiceExtension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1、UNNotificationServiceExtension简介"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、UNNotificationServiceExtension简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2、如何新建一个UNNotificationServiceExtension"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、如何新建一个UNNotificationServiceExtension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3、如何使用以及相关Demo"><span class="toc-number">1.3.</span> <span class="toc-text">1.3、如何使用以及相关Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、UNNotificationContentExtension"><span class="toc-number">2.</span> <span class="toc-text">2、UNNotificationContentExtension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1、UNNotificationContentExtension简介"><span class="toc-number">2.1.</span> <span class="toc-text">2.1、UNNotificationContentExtension简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2、如何新建一个UNNotificationContentExtension"><span class="toc-number">2.2.</span> <span class="toc-text">2.2、如何新建一个UNNotificationContentExtension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3、如何使用以及相关Demo"><span class="toc-number">2.3.</span> <span class="toc-text">2.3、如何使用以及相关Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3、UNNotificationAction"><span class="toc-number">3.</span> <span class="toc-text">3、UNNotificationAction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1、UNNotificationAction简介"><span class="toc-number">3.1.</span> <span class="toc-text">3.1、UNNotificationAction简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2、如何新建一个UNNotificationAction"><span class="toc-number">3.2.</span> <span class="toc-text">3.2、如何新建一个UNNotificationAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3、如何使用以及相关Demo"><span class="toc-number">3.3.</span> <span class="toc-text">3.3、如何使用以及相关Demo</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>更新晚啦，我要先跟大家说声抱歉哈~<br>如果大家还没有看我的这两篇文章，建议还是先阅读一下，循序渐进么~文章链接如下:</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/f5337e8f336d" target="_blank" rel="external">iOS开发 iOS10推送必看(基础篇)</a></li>
+<li><a href="http://www.jianshu.com/p/3d602a60ca4f" target="_blank" rel="external">iOS开发 iOS10推送必看(高阶1)</a><br>这次的最后，终于有demo咯~<br>在这篇文章，我会给大家讲一讲更高级一点的，定制化更高的远程通知。其中会补充我之前没讲的远程推送（多媒体）通知，以及UNNotificationServiceExtension，UNNotificationContentExtension，UNNotificationAction的相关类。相信大家看了这篇文章，虽不能说对苹果的远程推送了如指掌，但是也可以做一些基本的扩展咯~</li>
+</ul>
+<h1 id="1、UNNotificationServiceExtension"><a href="#1、UNNotificationServiceExtension" class="headerlink" title="1、UNNotificationServiceExtension"></a>1、UNNotificationServiceExtension</h1><h2 id="1-1、UNNotificationServiceExtension简介"><a href="#1-1、UNNotificationServiceExtension简介" class="headerlink" title="1.1、UNNotificationServiceExtension简介"></a>1.1、UNNotificationServiceExtension简介</h2><p>UNNotificationServiceExtension是iOS10推出后的一个新特性，先看这张图：<br><img src="http://upload-images.jianshu.io/upload_images/3220449-1c39520d04be69ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>从这张图上，我们可以看到，原先直接从APNs推送到用户手机的消息，中间添加了ServiceExtension处理的一个步骤（当然你也可以不处理），通过这个ServiceExtension，我们可以把即将给用户展示的通知内容，做各种自定义的处理，最终，给用户呈现一个更为丰富的通知，当然，如果网络不好，或者附件过大，可能在给定的时间内，我们没能将通知重新编辑，那么，则会显示发过来的原版通知内容。<br>那么ServiceExtension可以做什么呢？它的意义是什么呢？我总结了几点：</p>
+<p>1  <strong>安全</strong>安全总是摆在第一位的，从iOS9开始，苹果鼓励我们使用更为安全的https协议可以看的出来，苹果公司是对安全很重视的一家公司，为什么在这里我会提到安全呢？是因为之前我们的推送内容，不管是通过第三方，还是通过苹果自带的通知处理，如果让有心人对数据做一次拦截，抓个包啥的，我们推送的内容就会完全暴露，当然有的同学说，我可以加密啊~但是不知道大家有没有想过，如果数据加密，那通知栏会怎么展示呢？（你千万别跟我说你把所有的远程推送变成本地通知。。）通过此次这次增加的UNNotificationServiceExtension的类，便可以更好的帮助我们实现数据的加密。它的原理便是在收到通知后的最多30s内，你可以把你的通知内容，解密后，在重新展示在用户的通知拦上。</p>
+<p>2  <strong>内容的丰富</strong>之前的通知展示内容比较少，以至于被各种广告提醒占据了。这次苹果新添加的附件通知，结合上通知拓展类，便可以给用户展现出一个有着丰富内容的通知。比如，一个小短片的某一秒的画面啊（这里要强烈鄙视各大平台的某些电影预览图），又或者是配上一些小图片啊（通过服务器传来的imaUrl）等方式来吸引用户，诱导用户点开你的通知，促使用户会使用你的App。其实推送这个功能，虽然有的人会关闭，但是大部分的人还是开启的，所以说推送这个市场还是很大的哟~灵活利用推送，会让你的程序拥有无限的可能。</p>
+<h2 id="1-2、如何新建一个UNNotificationServiceExtension"><a href="#1-2、如何新建一个UNNotificationServiceExtension" class="headerlink" title="1.2、如何新建一个UNNotificationServiceExtension"></a>1.2、如何新建一个UNNotificationServiceExtension</h2><p>首先，我们不能通过创建UNNotificationServiceExtension的类来使用服务扩展，我们应当创建一个<strong>Target</strong>，这个Target自带一个模板，其中有2个方法是系统会自己调用的，如下：<br>// 你需要通过重写这个方法，来重写你的通知内容，也可以在这里下载附件内容- (void)didReceiveNotificationRequest:(UNNotificationRequest <em>)request withContentHandler:(void (^)(UNNotificationContent </em>contentToDeliver))contentHandler;// 如果处理时间太长，等不及处理了，就会把收到的apns直接展示出来- (void)serviceExtensionTimeWillExpire;</p>
+<p>开始跟着我创建一个UNNotificationServiceExtension吧。<br><strong>新建Target</strong><br><img src="http://upload-images.jianshu.io/upload_images/3220449-42ed2513c18e3e85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>选择如图所示：<br><img src="http://upload-images.jianshu.io/upload_images/3220449-4017ba4d6394f526.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>然后写名字，下一步，即可此时我们的目录结构里面，已经多出了一个文件夹了。<br><img src="http://upload-images.jianshu.io/upload_images/3220449-6537913777ad642b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3220449-88959f6a2d30f2cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>都多了一个myTest。<br><img src="http://upload-images.jianshu.io/upload_images/3220449-84416c3bd36cdc44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>注意看上图，这里的bundleID是你的工程名字的bundleID加上.名称。不要修改，系统创建的时候就创建好了，不过我还是给大家说一下这个格式如果你的工程的BundleID是coderxu.pushDemo<br>,则这个扩展的BundleID就是coderxu.pushDemo.mytest<br>,最后的后缀，是看咱们创建服务扩展时候的名字。其他的小细节，大家可以看看。到这一步，我们就新建了一个服务通知类的扩展。</p>
+<h2 id="1-3、如何使用以及相关Demo"><a href="#1-3、如何使用以及相关Demo" class="headerlink" title="1.3、如何使用以及相关Demo"></a>1.3、如何使用以及相关Demo</h2><p>在使用这个类的时候，我重写了以下代码，大家可以先看下：(1). 这是处理通知内容重写的方法:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(<span class="keyword">void</span> (^)(UNNotificationContent * _Nonnull))contentHandler &#123;</div><div class="line">    <span class="keyword">self</span>.contentHandler = contentHandler;</div><div class="line">    <span class="comment">// copy发来的通知，开始做一些处理</span></div><div class="line">    <span class="keyword">self</span>.bestAttemptContent = [request.content mutableCopy];</div><div class="line">    <span class="comment">// Modify the notification content here...</span></div><div class="line">    <span class="keyword">self</span>.bestAttemptContent.title = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@ [modified]"</span>, <span class="keyword">self</span>.bestAttemptContent.title];</div><div class="line">    </div><div class="line">    <span class="comment">// 重写一些东西</span></div><div class="line">    <span class="keyword">self</span>.bestAttemptContent.title = <span class="string">@"我是标题"</span>;</div><div class="line">    <span class="keyword">self</span>.bestAttemptContent.subtitle = <span class="string">@"我是子标题"</span>;</div><div class="line">    <span class="keyword">self</span>.bestAttemptContent.body = <span class="string">@"来自徐不同"</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 附件</span></div><div class="line">    <span class="built_in">NSDictionary</span> *dict =  <span class="keyword">self</span>.bestAttemptContent.userInfo;</div><div class="line">    <span class="built_in">NSDictionary</span> *notiDict = dict[<span class="string">@"aps"</span>];</div><div class="line">    <span class="built_in">NSString</span> *imgUrl = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@"</span>,notiDict[<span class="string">@"imageAbsoluteString"</span>]];</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (!imgUrl.length) &#123;</div><div class="line">        <span class="keyword">self</span>.contentHandler(<span class="keyword">self</span>.bestAttemptContent);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span> loadAttachmentForUrlString:imgUrl withType:<span class="string">@"png"</span> completionHandle:^(UNNotificationAttachment *attach) &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (attach) &#123;</div><div class="line">            <span class="keyword">self</span>.bestAttemptContent.attachments = [<span class="built_in">NSArray</span> arrayWithObject:attach];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">self</span>.contentHandler(<span class="keyword">self</span>.bestAttemptContent);</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>(2). 这是下载附件通知的方法:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)loadAttachmentForUrlString:(<span class="built_in">NSString</span> *)urlStr</div><div class="line">withType:(<span class="built_in">NSString</span> *)type</div><div class="line">completionHandle:(<span class="keyword">void</span>(^)(UNNotificationAttachment *attach))completionHandler&#123;</div><div class="line">    __block UNNotificationAttachment *attachment = <span class="literal">nil</span>;</div><div class="line">    <span class="built_in">NSURL</span> *attachmentURL = [<span class="built_in">NSURL</span> URLWithString:urlStr];</div><div class="line">    <span class="built_in">NSString</span> *fileExt = [<span class="keyword">self</span> fileExtensionForMediaType:type];</div><div class="line">    </div><div class="line">    <span class="built_in">NSURLSession</span> *session = [<span class="built_in">NSURLSession</span> sessionWithConfiguration:[<span class="built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];</div><div class="line">    [[session downloadTaskWithURL:attachmentURL</div><div class="line">                completionHandler:^(<span class="built_in">NSURL</span> *temporaryFileLocation, <span class="built_in">NSURLResponse</span> *response, <span class="built_in">NSError</span> *error) &#123;</div><div class="line">                    <span class="keyword">if</span> (error != <span class="literal">nil</span>) &#123;</div><div class="line">                        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, error.localizedDescription);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="built_in">NSFileManager</span> *fileManager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">                        <span class="built_in">NSURL</span> *localURL = [<span class="built_in">NSURL</span> fileURLWithPath:[temporaryFileLocation.path stringByAppendingString:fileExt]];</div><div class="line">                        [fileManager moveItemAtURL:temporaryFileLocation toURL:localURL error:&amp;error];</div><div class="line">                        </div><div class="line">                        <span class="built_in">NSError</span> *attachmentError = <span class="literal">nil</span>;</div><div class="line">                        attachment = [UNNotificationAttachment attachmentWithIdentifier:<span class="string">@""</span> URL:localURL options:<span class="literal">nil</span> error:&amp;attachmentError];</div><div class="line">                        <span class="keyword">if</span> (attachmentError) &#123;</div><div class="line">                            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, attachmentError.localizedDescription);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    completionHandler(attachment);</div><div class="line">                &#125;] resume];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>(3)判断文件类型的方法<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="type">NSString</span> *)fileExtensionForMediaType:(<span class="type">NSString</span> *)<span class="class"><span class="keyword">type</span> </span>&#123;</div><div class="line">    <span class="type">NSString</span> *ext = <span class="class"><span class="keyword">type</span></span>;</div><div class="line">    <span class="keyword">if</span> ([<span class="class"><span class="keyword">type</span> <span class="title">isEqualToString</span></span>:@<span class="string">"image"</span>]) &#123;</div><div class="line">        ext = @<span class="string">"jpg"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ([<span class="class"><span class="keyword">type</span> <span class="title">isEqualToString</span></span>:@<span class="string">"video"</span>]) &#123;</div><div class="line">        ext = @<span class="string">"mp4"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ([<span class="class"><span class="keyword">type</span> <span class="title">isEqualToString</span></span>:@<span class="string">"audio"</span>]) &#123;</div><div class="line">        ext = @<span class="string">"mp3"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [@<span class="string">"."</span> stringByAppendingString:ext];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第一段代码主要讲通知内容的重组，逻辑就是有附件的url，我就下载，如果没有url我就直接展示通知。<br>第二段代码主要讲的是，用系统自带类，下载图，存图，找到filePath，创建通知的附件内容。（创建附件的url，必须是一个文件路径，也就是说，必须下载下，才能获取文件路径,开头是file://）<br>第三段的代码主要讲判断文件的后缀类型，然后前端好处理。这里我的代码是写死了，因为我就测试一张图。最好的方式是服务器返回的 推送内容中，带有附件的类型。我的iOS开发 iOS10推送必看(高阶1)(<a href="http://www.jianshu.com/p/3d602a60ca4f)一文中，有讲多媒体附件的类型，以及相关的大小限制。" target="_blank" rel="external">http://www.jianshu.com/p/3d602a60ca4f)一文中，有讲多媒体附件的类型，以及相关的大小限制。</a></p>
+<p>这里强烈建议，处理推送内容的时候，让服务器带上文件类型。重要的事情说三遍</p>
+<p><strong>在补充一些问题</strong><br>1.在这个推送服务的扩展类中，为什么我使用了系统自带类下载，没有使用AFN？<br>答：不知道为什么，导入AFN后总是出现各种编译报错啊。主要涉及这几个情况<br>1.用cocoapods导入AFN，在类引入AFN，编译报错！！<br>2.手动拖拽AFN进工程（不勾选），在类引入AFN，编译报错！！<br>3.手动拖拽AFN进工程(勾选)，直接编译报错！！<br>4.下载用通知回调的方式（慢，线程不确定）<br>最后我就选择这个block回调，系统类下载的方式，来下载通知中的附件。<br>以下是一些错误的截图：(可以不看)<br><img src="http://upload-images.jianshu.io/upload_images/3220449-5d8c59fc75ab2df5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3220449-711625601b5308dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3220449-0ed472f65364dc08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>2.如果调试这个通知扩展类，为什么我跑程序的时候，打断点无反应？</strong>答：这是因为你跑的target不对，正确的做法是，跑正确的target，具体如下图：<img src="http://upload-images.jianshu.io/upload_images/3220449-9173a1a39e13bf0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>选择你的程序Target<br><img src="http://upload-images.jianshu.io/upload_images/3220449-aa137e5f5a38c6b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这个时候，大家在打断点，就可以啦~</p>
+<p>最后，在附上推送的内容格式。<br>推送内容格式如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"aps"</span>: &#123;</div><div class="line">        <span class="attr">"alert"</span>: <span class="string">"This is some fancy message."</span>,</div><div class="line">        <span class="attr">"badge"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"sound"</span>: <span class="string">"default"</span>,</div><div class="line">        <span class="attr">"mutable-content"</span>: <span class="string">"1"</span>,</div><div class="line">        <span class="attr">"imageAbsoluteString"</span>: <span class="string">"http://upload.univs.cn/2012/0104/1325645511371.jpg"</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里我们要注意一定要有”mutable-content”: “1”<br>,以及一定要有Alert的字段，否则可能会拦截通知失败。（苹果文档说的）。除此之外，我们还可以添加自定义字段，比如，图片地址，图片类型，大家慢慢摸索下吧~有问题可以留言哟~<br>这一章的最后，附上成功推送的展示图:<br><img src="http://upload-images.jianshu.io/upload_images/3220449-78271b3de56486b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>稍后补充以下内容~</p>
+<h1 id="2、UNNotificationContentExtension"><a href="#2、UNNotificationContentExtension" class="headerlink" title="2、UNNotificationContentExtension"></a>2、UNNotificationContentExtension</h1><h2 id="2-1、UNNotificationContentExtension简介"><a href="#2-1、UNNotificationContentExtension简介" class="headerlink" title="2.1、UNNotificationContentExtension简介"></a>2.1、UNNotificationContentExtension简介</h2><h2 id="2-2、如何新建一个UNNotificationContentExtension"><a href="#2-2、如何新建一个UNNotificationContentExtension" class="headerlink" title="2.2、如何新建一个UNNotificationContentExtension"></a>2.2、如何新建一个UNNotificationContentExtension</h2><h2 id="2-3、如何使用以及相关Demo"><a href="#2-3、如何使用以及相关Demo" class="headerlink" title="2.3、如何使用以及相关Demo"></a>2.3、如何使用以及相关Demo</h2><h1 id="3、UNNotificationAction"><a href="#3、UNNotificationAction" class="headerlink" title="3、UNNotificationAction"></a>3、UNNotificationAction</h1><h2 id="3-1、UNNotificationAction简介"><a href="#3-1、UNNotificationAction简介" class="headerlink" title="3.1、UNNotificationAction简介"></a>3.1、UNNotificationAction简介</h2><h2 id="3-2、如何新建一个UNNotificationAction"><a href="#3-2、如何新建一个UNNotificationAction" class="headerlink" title="3.2、如何新建一个UNNotificationAction"></a>3.2、如何新建一个UNNotificationAction</h2><h2 id="3-3、如何使用以及相关Demo"><a href="#3-3、如何使用以及相关Demo" class="headerlink" title="3.3、如何使用以及相关Demo"></a>3.3、如何使用以及相关Demo</h2><p><strong>重要的事情说三遍，<a href="https://github.com/CoderWQ/XZPushTest/tree/master" target="_blank" rel="external">demo地址</a></strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS入门/">iOS入门</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.hundredone.win/2017/02/15/A-OC的碎碎念/iOS10推送必看UNNotificationServiceExtension/" data-title="iOS10推送必看UNNotificationServiceExtension | 香蕉的技术博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/02/17/P-Python/9个超酷的深度学习(Python)案例/" title="9个超酷的深度学习(Python)案例">
+  <strong>上一篇：</strong><br/>
+  <span>
+  9个超酷的深度学习(Python)案例</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/02/13/O-  Crash和经验总结遇到的坑/最好用的 iOS 快速布局UI库/"  title="最好用的 iOS 快速布局UI库">
+ <strong>下一篇：</strong><br/> 
+ <span>最好用的 iOS 快速布局UI库
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/02/15/A-OC的碎碎念/iOS10推送必看UNNotificationServiceExtension/" data-title="iOS10推送必看UNNotificationServiceExtension" data-url="http://www.hundredone.win/2017/02/15/A-OC的碎碎念/iOS10推送必看UNNotificationServiceExtension/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、UNNotificationServiceExtension"><span class="toc-number">1.</span> <span class="toc-text">1、UNNotificationServiceExtension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1、UNNotificationServiceExtension简介"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、UNNotificationServiceExtension简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2、如何新建一个UNNotificationServiceExtension"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、如何新建一个UNNotificationServiceExtension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3、如何使用以及相关Demo"><span class="toc-number">1.3.</span> <span class="toc-text">1.3、如何使用以及相关Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、UNNotificationContentExtension"><span class="toc-number">2.</span> <span class="toc-text">2、UNNotificationContentExtension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1、UNNotificationContentExtension简介"><span class="toc-number">2.1.</span> <span class="toc-text">2.1、UNNotificationContentExtension简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2、如何新建一个UNNotificationContentExtension"><span class="toc-number">2.2.</span> <span class="toc-text">2.2、如何新建一个UNNotificationContentExtension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3、如何使用以及相关Demo"><span class="toc-number">2.3.</span> <span class="toc-text">2.3、如何使用以及相关Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3、UNNotificationAction"><span class="toc-number">3.</span> <span class="toc-text">3、UNNotificationAction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1、UNNotificationAction简介"><span class="toc-number">3.1.</span> <span class="toc-text">3.1、UNNotificationAction简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2、如何新建一个UNNotificationAction"><span class="toc-number">3.2.</span> <span class="toc-text">3.2、如何新建一个UNNotificationAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3、如何使用以及相关Demo"><span class="toc-number">3.3.</span> <span class="toc-text">3.3、如何使用以及相关Demo</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-Cocos2d-x/" title="iOS Cocos2d-x">iOS Cocos2d-x<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS入门/" title="iOS入门">iOS入门<sup>41</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS进阶/" title="iOS进阶">iOS进阶<sup>17</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/swift/" title="swift">swift<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>52</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/源码学习分享/" title="源码学习分享">源码学习分享<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/MAC-IOS基础/" title="MAC&amp;&amp;IOS基础">MAC&amp;&amp;IOS基础<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS黑魔法/" title="iOS黑魔法">iOS黑魔法<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-Cocos2d-x/" title="iOS Cocos2d-x">iOS Cocos2d-x<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cocopods/" title="cocopods">cocopods<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Xcode/" title="Xcode">Xcode<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/runtime/" title="runtime">runtime<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS进阶拓展/" title="iOS进阶拓展">iOS进阶拓展<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HEXO/" title="HEXO">HEXO<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/项目仿写/" title="项目仿写">项目仿写<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/blockKit/" title="blockKit">blockKit<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift基础/" title="swift基础">swift基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS开发/" title="iOS开发">iOS开发<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/控件/" title="控件">控件<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS项目/" title="iOS项目">iOS项目<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Xcode8/" title="Xcode8">Xcode8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/crash/" title="crash">crash<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/直播/" title="直播">直播<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/p/ee3c96cee9cd" target="_blank" title="个人介绍">个人介绍</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/users/a3ae6d7c68b6/latest_articles" target="_blank" title="香蕉简书">香蕉简书</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+  <!-- /*<p class="asidetitle">微信公众号</p>*/-->
+    	<p align=center size:"16" color="red"><strong>常用工具下载网页</strong></p>
+	</br>
+    <a target="_blank" href="http://xclient.info/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool1.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+  	</br>
+  	<a target="_blank" href="http://www.waitsun.com/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool2.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+
+</div>
+
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+<!--   <p class="asidetitle">微信公众号</p>-->
+  <p align=center size:"16" color="blue"><strong>微信公众号</strong></p>
+  </br>
+    <a target="_blank" href="http://www.jianshu.com/p/ee3c96cee9cd">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/weixin.jpg" alt="Ballade" width=100% height=calc(width)>
+  	</a>
+  	<p align=center>欢迎一起利用碎片时间</br>
+  		学习iOS技术开发
+  	</p>
+</div>
+
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="OneHundredSir" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 成长之路,厚积薄发 <br/>
+			一起成长QQ群:365204530,微信技术公众号:大大家的IOS说</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/6013257513" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/OneHundredSir" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:15507596877@139.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Hundred Wang">Hundred Wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hundredone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260805874'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1260805874' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

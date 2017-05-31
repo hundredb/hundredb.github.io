@@ -1,0 +1,699 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS Crash 杀手排名 | 香蕉的技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Hundred Wang">
+    
+
+    
+    <meta name="description" content="参考原文
+杀手 NO.1 NSInvalidArgumentException 异常出现这个crash的原因有很多，选取了崩溃次数较多的crash。
+crash 日志1-11-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[3]
+crash日">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS Crash 杀手排名">
+<meta property="og:url" content="http://www.hundredone.win/2017/01/15/O-  Crash和经验总结遇到的坑/iOSCrash杀手排名/index.html">
+<meta property="og:site_name" content="香蕉的技术博客">
+<meta property="og:description" content="参考原文
+杀手 NO.1 NSInvalidArgumentException 异常出现这个crash的原因有很多，选取了崩溃次数较多的crash。
+crash 日志1-11-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[3]
+crash日">
+<meta property="og:image" content="http://cc.cocimg.com/api/uploads/20170122/1485050050201567.jpg">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/416556-f3368e3fd81bea96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/416556-6e8c28429b0820d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-22T11:29:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS Crash 杀手排名">
+<meta name="twitter:description" content="参考原文
+杀手 NO.1 NSInvalidArgumentException 异常出现这个crash的原因有很多，选取了崩溃次数较多的crash。
+crash 日志1-11-[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[3]
+crash日">
+<meta name="twitter:image" content="http://cc.cocimg.com/api/uploads/20170122/1485050050201567.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="香蕉的技术博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/fauthor32.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author114.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/author114.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="香蕉的技术博客" title="香蕉的技术博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="香蕉的技术博客">香蕉的技术博客</a></h1>
+				<h2 class="blog-motto">用卑微的视角,为浩瀚的科技大海共享一份绵薄之力</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 244624813535589000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/15/O-  Crash和经验总结遇到的坑/iOSCrash杀手排名/" title="iOS Crash 杀手排名" itemprop="url">iOS Crash 杀手排名</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Hundred Wang" target="_blank" itemprop="author">Hundred Wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-15T02:49:50.000Z" itemprop="datePublished"> 发表于 2017-01-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-1-NSInvalidArgumentException-异常"><span class="toc-number">1.</span> <span class="toc-text">杀手 NO.1 NSInvalidArgumentException 异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有3种方案可以解决该问题，如下："><span class="toc-number">1.1.</span> <span class="toc-text">有3种方案可以解决该问题，如下：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。"><span class="toc-number">1.1.1.</span> <span class="toc-text">方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。"><span class="toc-number">1.1.2.</span> <span class="toc-text">方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。"><span class="toc-number">1.1.3.</span> <span class="toc-text">方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-2-SIGSEGV-异常"><span class="toc-number">2.</span> <span class="toc-text">杀手 NO.2 SIGSEGV 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-3-NSRangeException-异常"><span class="toc-number">3.</span> <span class="toc-text">杀手 NO.3 NSRangeException 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-4-SIGPIPE-异常"><span class="toc-number">4.</span> <span class="toc-text">杀手 NO.4 SIGPIPE 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-5-SIGABRT-异常"><span class="toc-number">5.</span> <span class="toc-text">杀手 NO.5 SIGABRT 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手总结"><span class="toc-number">6.</span> <span class="toc-text">杀手总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章："><span class="toc-number">7.</span> <span class="toc-text">参考文章：</span></a></li></ol>
+		
+		</div>
+		
+		<p><img src="http://cc.cocimg.com/api/uploads/20170122/1485050050201567.jpg" alt=""></p>
+<p><a href="http://www.jianshu.com/p/c7efbc283480" target="_blank" rel="external">参考原文</a></p>
+<h3 id="杀手-NO-1-NSInvalidArgumentException-异常"><a href="#杀手-NO-1-NSInvalidArgumentException-异常" class="headerlink" title="杀手 NO.1 NSInvalidArgumentException 异常"></a>杀手 NO.1 NSInvalidArgumentException 异常</h3><p>出现这个crash的原因有很多，选取了崩溃次数较多的crash。</p>
+<p><strong>crash 日志1-1</strong><br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-[__NSPlaceholderDictionary initWithObjects:forKeys:<span class="built_in">count</span>:]: attempt <span class="keyword">to</span> insert <span class="literal">nil</span> object <span class="keyword">from</span> objects[<span class="number">3</span>]</div></pre></td></tr></table></figure></p>
+<p>crash日志拿到了，怎么复现该现象呢？我们看到initWithObjects:forKeys:count:，猜测一下应该是NSDictionary初始化时的问题，在看后面的提示attempt to insert nil object，此时就可以做一个猜测，应该是NSDictionary初始化时插入nil对象造成的异常。下面我们写一段代码来验证一下：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *password = <span class="literal">nil</span>;</div><div class="line"><span class="built_in">NSDictionary</span> *dict = @&#123;</div><div class="line"><span class="string">@"userName"</span>: <span class="string">@"bruce"</span>,</div><div class="line"><span class="string">@"password"</span>: password</div><div class="line">&#125;;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"dict is : %@"</span>, dict);</div></pre></td></tr></table></figure></p>
+<p>运行过后，崩溃信息如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/416556-f3368e3fd81bea96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Crash 日志1-1"><br>上面的崩溃信息证明了我们的猜测。从崩溃日志记录中，查询到该问题的崩溃记录有33条（总崩溃记录304条），占10.85%，崩溃率比较高。为什么会出现这种现象呢？如何解决这样的crash呢？</p>
+<p><strong>崩溃率高的原因是因为自己的框架中采用了去model化的设计思想，不会把后台返回的数据转换成model，而是通过一个reformer机制转换成NSDictionary形式，提供给目标对象使用，在转换成NSDictionary的过程中，后台返回的数据有时可能为空，就会造成插入nil对象，从而导致crash。</strong></p>
+<h4 id="有3种方案可以解决该问题，如下："><a href="#有3种方案可以解决该问题，如下：" class="headerlink" title="有3种方案可以解决该问题，如下："></a>有3种方案可以解决该问题，如下：</h4><h5 id="方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。"><a href="#方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。" class="headerlink" title="方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。"></a>方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。</h5><h5 id="方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。"><a href="#方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。" class="headerlink" title="方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。"></a>方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。</h5><h5 id="方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。"><a href="#方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。" class="headerlink" title="方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。"></a>方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。</h5><p><strong>NSDictionary插入nil对象会造成崩溃，但是插入NSNull对象是不会造成崩溃的，只要利用runtime的Swizzle Method把nil对象给转换成NSNull对象就可以把该问题给解决了。</strong>创建一个NSDictionary的类别，利用runtime的Swizzle Method来替换系统的方法。源码实现可以参考Glow团队封装的NSDictionary+NilSafe(Github上可下载到), <strong>全部源码会在文章末尾提供</strong>，现截取其中的部分代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">instancetype</span>)gl_dictionaryWithObjects:(<span class="keyword">const</span> <span class="keyword">id</span> [])objects forKeys:(<span class="keyword">const</span> <span class="keyword">id</span>&lt;<span class="built_in">NSCopying</span>&gt; [])keys count:(<span class="built_in">NSUInteger</span>)cnt &#123;</div><div class="line">    <span class="keyword">id</span> safeObjects[cnt];</div><div class="line">    <span class="keyword">id</span> safeKeys[cnt];</div><div class="line">    <span class="built_in">NSUInteger</span> j = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</div><div class="line">        <span class="keyword">id</span> key = keys[i];</div><div class="line">        <span class="keyword">id</span> obj = objects[i];</div><div class="line">        <span class="keyword">if</span> (!key) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!obj) &#123;</div><div class="line">        obj = [<span class="built_in">NSNull</span> null];</div><div class="line">        &#125;</div><div class="line">        safeKeys[j] = key;</div><div class="line">        safeObjects[j] = obj;</div><div class="line">        j++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> [<span class="keyword">self</span> gl_dictionaryWithObjects:safeObjects forKeys:safeKeys count:j];</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p><strong>crash 日志1-2</strong></p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">data</span> parameter <span class="keyword">is</span> <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<p>通过日志信息，可以把崩溃问题定位到参数为nil的情况，在看了下堆栈的日志信息，<strong>把问题定位到了NSJSONSerialization序列化的时候，传入data为nil，造成的崩溃</strong>。为了验证是不是该问题，我写了一段代码做了下验证：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSData</span> *data = <span class="literal">nil</span>;</div><div class="line"><span class="built_in">NSError</span> *error;</div><div class="line"><span class="built_in">NSDictionary</span> *orginDict = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="built_in">NSJSONReadingMutableContainers</span> error:&amp;error];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"originDict is : %@"</span>, orginDict);</div></pre></td></tr></table></figure>
+<p>运行后，崩溃信息如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/416556-6e8c28429b0820d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Crash日志 1-2"><br>这个问题比较好解决，在序列化的时候，统一加入判断，判断data是不是nil即可。</p>
+<p><strong>crash 日志1-3</strong><br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unrecognized selector sent to<span class="built_in"> instance </span>0x15d23910</div></pre></td></tr></table></figure></p>
+<p>造成这条崩溃的原因，想必大家都比较熟悉了，<strong>就是一个类调用了一个不存在的方法，造成的崩溃。</strong>解决这样的问题，可以在写一个方法的时候，判断一下其类的类型，不符合类型的不让其调用，也可以使用runtime对常见的方法调用做一下错误兼容。比如我这边经常会出现这样的崩溃：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-[__NSCFConstantString objectForKeyedSubscript:]: unrecognized selector sent to<span class="built_in"> instance </span>0x1741af420</div><div class="line">-[NSNull length]: unrecognized selector sent to<span class="built_in"> instance </span>0x1b21e6ef8</div><div class="line">-[__NSCFConstantString objectForKeyedSubscript:]: unrecognized selector sent to<span class="built_in"> instance</span></div><div class="line">-[__NSDictionaryI length]: unrecognized selector sent to<span class="built_in"> instance </span>0x174264500</div></pre></td></tr></table></figure></p>
+<p>当这些对象调用这几个不存在的方法的时候，替换成自己定义的一个方法，对它们做一下错误兼容，使应用不会崩溃。现截取部分代码实现，全部源码会在文章末尾提供。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@implementation</span> NSString (NSRangeException)</div><div class="line">   </div><div class="line">+ (void)load&#123;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line"><span class="selector-tag">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line"><span class="variable">@autoreleasepool</span> &#123;</div><div class="line"><span class="selector-attr">[objc_getClass("__NSCFConstantString") swizzleMethod:@selector(objectForKeyedSubscript:) swizzledSelector:@selector(replace_objectForKeyedSubscript:)]</span>;</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="selector-tag">-</span> (id)<span class="selector-tag">replace_objectForKeyedSubscript</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">key</span> &#123;</div><div class="line">return nil;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="variable">@end</span></div></pre></td></tr></table></figure></p>
+<p>小结一下，造成NSInvalidArgumentException异常大概有以下原因:</p>
+<ul>
+<li>NSDictionary插入nil的对象。NSMutableDictionary也是同样的道理。</li>
+<li>NSJSONSerialization序列化的时候，传入data为nil。</li>
+<li>an unrecognized selector 无法识别的方法<br>NSInvalidArgumentException的崩溃记录有149条（总崩溃记录304条），占49.01%，称霸Crash界，杀手排名第一。</li>
+</ul>
+<h3 id="杀手-NO-2-SIGSEGV-异常"><a href="#杀手-NO-2-SIGSEGV-异常" class="headerlink" title="杀手 NO.2 SIGSEGV 异常"></a>杀手 NO.2 SIGSEGV 异常</h3><p>SIGSEGV是当SEGV发生的时候，让代码终止的标识。<strong>当去访问没有被开辟的内存或者已经被释放的内存时，就会发生这样的异常。另外，在低内存的时候，也可能会产生这样的异常。</strong></p>
+<p>对于这样的异常，我们可以使用两种方式来解决，一种方式使用Xcode自带的内存分析工具(Leaks)，一种是使用facebook提供的自动化工具来监测内存泄漏问题，如:<br><a href="https://code.facebook.com/posts/583946315094347/automatic-memory-leak-detection-on-ios/" target="_blank" rel="external">FBRetainCycleDetector、FBAllocationTracker、FBMemoryProfiler</a></p>
+<p>例子1:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dataOut = <span class="built_in">malloc</span>(dataOutAvailable * <span class="keyword">sizeof</span>(<span class="keyword">uint8_t</span>));</div></pre></td></tr></table></figure></p>
+<p>这是使用Xcode自带的Leaks工具检测到的内存泄漏，通过代码我们看出这是一个C语言使用malloc函数分配了一块内存地址，但是在不使用的时候却忘记了释放其内存地址，这样就造成了内存泄漏，应该在其不使用的时候加上如下代码：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">free(<span class="name">dataOut</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>另外，通过这个例子我们也要特别注意，在使用C语言对象的时候，一定要记得在不使用的时候给释放掉，ARC并不能释放掉这块内存。</p>
+<p>例子2:<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Can<span class="symbol">'t</span> add <span class="keyword">self</span> <span class="keyword">as</span> subview crash</div></pre></td></tr></table></figure></p>
+<p>造成这个崩溃的原因，<strong>一种原因是在push或pop一个视图的时候，并且设置了animated:YES，如果此时动画(animated)还没有完成，这个时候，你在去push或pop另外一个视图的时候，就会造成该异常。 也有其他原因可以造成这个崩溃</strong>，比如：<br><figure class="highlight cos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.<span class="keyword">view</span> addSubview:self.<span class="keyword">view</span>]<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>复现这个现象，我写了一个下面的代码测试，如下：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)btnAction:(<span class="keyword">id</span>)sender &#123;</div><div class="line"><span class="built_in">UIViewController</span> *test01 = [[<span class="built_in">UIViewController</span> alloc] init];</div><div class="line">[<span class="keyword">self</span>.navigationController pushViewController:test01 animated:<span class="literal">YES</span>];</div><div class="line">[<span class="keyword">self</span>.navigationController pushViewController:test01 animated:<span class="literal">YES</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>解决该异常最简单的方式是把animated设置为NO，但是很不友好，把系统自带的动画效果给去掉了。另外一种友好的方式就是通过runtime来进行实现了，通过安全的方式，确保当有控制器正在进行入栈或出栈时，没有其他入栈或出栈操作。<strong>具体源码会在文章末尾提供</strong>。</p>
+<p><strong>SIGSEGV的崩溃记录有57条(总共304条崩溃记录)，占18.75%。在Crash界排名第二。</strong></p>
+<h3 id="杀手-NO-3-NSRangeException-异常"><a href="#杀手-NO-3-NSRangeException-异常" class="headerlink" title="杀手 NO.3 NSRangeException 异常"></a>杀手 NO.3 NSRangeException 异常</h3><p>造成这个异常，就是越界异常了，在iOS中我们经常碰到的越界异常有两种，一种是数组越界，一种字符串截取越界，我们通过crash日志来具体分析一下。</p>
+<p><strong>crash 日志3-1</strong><br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-[__NSArrayM objectAtIndex:]: index 1 beyond bounds for empty<span class="built_in"> array</span></div><div class="line">-[__NSCFConstantString substringToIndex:]: Index 10 out of bounds; string length 0</div></pre></td></tr></table></figure></p>
+<p>通过日志可以很明显的知道问题，就是越界造成的，复现该现象也比较简单，在此就略过了。怎么解决呢？</p>
+<p>方案一：在对数组取数据的时候，要判断一下数组的长度大于取的index，这个要在平时写代码的时候给规范起来。同样在对字符串进行截取的时候，也需要做类似的判断。但现实的情况是，有时我们会忘了写这样的逻辑判断，就会有潜在的崩溃问题。如何做一下统一的判断呢？即使开发人员忘了写这样的逻辑判断也不会造成崩溃，从框架层面来杜绝这类的崩溃，方案二给出了答案。</p>
+<p>方案二：利用runtime的Swizzle Method特性，可以实现从框架层面杜绝这类的崩溃问题，这样做的好处有两点：</p>
+<ol>
+<li>开发人员忘了写判断越界的逻辑，也不会造成app的崩溃，对开发人员来说是透明的。</li>
+<li>不需要修改现有的代码，对现有代码的侵入性降低到最低，不需要添加大量重复的逻辑判断代码。<br><strong>全部源码会在文章末尾提供</strong>，现截取部分代码实现：</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@implementation</span> NSArray (NSRangeException)</div><div class="line">   </div><div class="line">+ (<span class="keyword">void</span>)load&#123;</div><div class="line"><span class="keyword">static</span> dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line"><span class="meta">@autoreleasepool</span> &#123;</div><div class="line">[objc_getClass(<span class="string">"__NSArray0"</span>) <span class="string">swizzleMethod:</span><span class="meta">@selector</span>(<span class="string">objectAtIndex:</span>) <span class="string">swizzledSelector:</span><span class="meta">@selector</span>(<span class="string">emptyObjectIndex:</span>)];</div><div class="line">[objc_getClass(<span class="string">"__NSArrayI"</span>) <span class="string">swizzleMethod:</span><span class="meta">@selector</span>(<span class="string">objectAtIndex:</span>) <span class="string">swizzledSelector:</span><span class="meta">@selector</span>(<span class="string">arrObjectIndex:</span>)];</div><div class="line">[objc_getClass(<span class="string">"__NSArrayM"</span>) <span class="string">swizzleMethod:</span><span class="meta">@selector</span>(<span class="string">objectAtIndex:</span>) <span class="string">swizzledSelector:</span><span class="meta">@selector</span>(<span class="string">mutableObjectIndex:</span>)];</div><div class="line">[objc_getClass(<span class="string">"__NSArrayM"</span>) <span class="string">swizzleMethod:</span><span class="meta">@selector</span>(<span class="string">insertObject:</span><span class="string">atIndex:</span>) <span class="string">swizzledSelector:</span><span class="meta">@selector</span>(<span class="string">mutableInsertObject:</span><span class="string">atIndex:</span>)];</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">   </div><div class="line">- (id)<span class="string">emptyObjectIndex:</span>(NSInteger)index&#123;</div><div class="line"><span class="keyword">return</span> nil;</div><div class="line">&#125;</div><div class="line">   </div><div class="line">- (id)<span class="string">arrObjectIndex:</span>(NSInteger)index&#123;</div><div class="line"><span class="keyword">if</span> (index &gt;= self.count || index &lt; <span class="number">0</span>) &#123;</div><div class="line"><span class="keyword">return</span> nil;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> [self <span class="string">arrObjectIndex:</span>index];</div><div class="line">&#125;</div><div class="line">   </div><div class="line">- (id)<span class="string">mutableObjectIndex:</span>(NSInteger)index&#123;</div><div class="line"><span class="keyword">if</span> (index &gt;= self.count || index &lt; <span class="number">0</span>) &#123;</div><div class="line"><span class="keyword">return</span> nil;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> [self <span class="string">mutableObjectIndex:</span>index];</div><div class="line">&#125;</div><div class="line">   </div><div class="line">- (<span class="keyword">void</span>)<span class="string">mutableInsertObject:</span>(id)object <span class="string">atIndex:</span>(NSUInteger)index&#123;</div><div class="line"><span class="keyword">if</span> (object) &#123;</div><div class="line">[self <span class="string">mutableInsertObject:</span>object <span class="string">atIndex:</span>index];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="meta">@end</span></div></pre></td></tr></table></figure>
+<p><strong>越界的崩溃记录有46条（总共崩溃记录是304条），占15.13%，在crash界杀手排名第三。</strong></p>
+<h3 id="杀手-NO-4-SIGPIPE-异常"><a href="#杀手-NO-4-SIGPIPE-异常" class="headerlink" title="杀手 NO.4 SIGPIPE 异常"></a>杀手 NO.4 SIGPIPE 异常</h3><p>先解释一下什么是SIGPIPE异常，通俗一点的描述是这样的：对一个端已经关闭的socket调用两次write，第二次write将会产生SIGPIPE信号，该信号默认结束进程。</p>
+<p>那如何解决该问题呢？对SIGPIPE信号可以进行捕获，也可将其忽略，对于iOS系统来说，只需要把下面这段代码放在.pch文件中即可。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 仅在 IOS 系统上支持 SO_NOSIGPIPE</span></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(SO_NOSIGPIPE) &amp;&amp; !defined(MSG_NOSIGNAL)</span></div><div class="line"><span class="comment">// We do not want SIGPIPE if writing to socket.</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> <span class="keyword">value</span> = <span class="number">1</span>;</div><div class="line">setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &amp;<span class="keyword">value</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p><strong>SIGPIPE的崩溃记录有11条(总共304条崩溃记录)，占3.61%。在Crash界排名第四。</strong></p>
+<h3 id="杀手-NO-5-SIGABRT-异常"><a href="#杀手-NO-5-SIGABRT-异常" class="headerlink" title="杀手 NO.5 SIGABRT 异常"></a>杀手 NO.5 SIGABRT 异常</h3><p><strong>这是一个让程序终止的标识，会在断言、app内部、操作系统用终止方法抛出。通常发生在异步执行系统方法的时候。如CoreData、NSUserDefaults等，还有一些其他的系统多线程操作。</strong></p>
+<p>注意：这并不一定意味着是系统代码存在bug，代码仅仅是成了无效状态，或者异常状态。<br><strong>SIGABRT崩溃记录9条(总共304条崩溃记录)，占2.96%。Crash界排名第五。</strong></p>
+<h3 id="杀手总结"><a href="#杀手总结" class="headerlink" title="杀手总结"></a>杀手总结</h3><p>前面5大crash杀手，占了89.46%的崩溃率，解决了这5大crash杀手，基本上你的app就很健壮了，剩下的崩溃问题就需要具体问题具体分析了。</p>
+<p>源码下载地址</p>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><ul>
+<li>参考1:<a href="http://zhijianshusheng.github.io/2016/07/11/%E6%8C%89%E5%91%A8%E5%88%86%E7%B1%BB/20160711-0718/%E5%AF%BC%E8%87%B4iOS%E5%B4%A9%E6%BA%83%E7%9A%84%E6%9C%80%E5%B8%B8%E8%A7%815%E5%A4%A7%E5%85%83%E5%87%B6/" target="_blank" rel="external">导致iOS崩溃的最常见5大元凶</a></li>
+<li>参考2:<a href="https://code.facebook.com/posts/583946315094347/automatic-memory-leak-detection-on-ios/" target="_blank" rel="external">automatic-memory-leak</a></li>
+<li>参考3:<a href="http://tech.glowing.com/cn/how-we-made-nsdictionary-nil-safe/" target="_blank" rel="external">当 NSDictionary 遇见 nil</a></li>
+<li>参考4:<a href="http://stackoverflow.com/questions/19560198/ios-app-error-cant-add-self-as-subview" target="_blank" rel="external">Can’t add self as subview</a></li>
+<li>参考5:<a href="https://my.oschina.net/moooofly/blog/474604" target="_blank" rel="external">SIGPIPE 信号处理整理</a></li>
+<li>参考6:<a href="http://devma.cn/blog/2016/11/10/ios-beng-kui-crash-jie-xi/" target="_blank" rel="external">iOS 崩溃Crash解析</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS进阶/">iOS进阶</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.hundredone.win/2017/01/15/O-  Crash和经验总结遇到的坑/iOSCrash杀手排名/" data-title="iOS Crash 杀手排名 | 香蕉的技术博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/01/19/A-OC的碎碎念/[原创]cocopods-2016-11月安装法（ruby完整版）/" title="cocopods安装法（ruby完整版)201701">
+  <strong>上一篇：</strong><br/>
+  <span>
+  cocopods安装法（ruby完整版)201701</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/01/10/A-完全小白图文攻略/如何正确理解Bitcode/"  title="如何正确理解 Bitcode">
+ <strong>下一篇：</strong><br/> 
+ <span>如何正确理解 Bitcode
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/01/15/O-  Crash和经验总结遇到的坑/iOSCrash杀手排名/" data-title="iOS Crash 杀手排名" data-url="http://www.hundredone.win/2017/01/15/O-  Crash和经验总结遇到的坑/iOSCrash杀手排名/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-1-NSInvalidArgumentException-异常"><span class="toc-number">1.</span> <span class="toc-text">杀手 NO.1 NSInvalidArgumentException 异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有3种方案可以解决该问题，如下："><span class="toc-number">1.1.</span> <span class="toc-text">有3种方案可以解决该问题，如下：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。"><span class="toc-number">1.1.1.</span> <span class="toc-text">方案一：后台在返回数据的时候进行校验，对空值进行处理。但是在项目中有些空值是有特殊的用途，此种方案不可行。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。"><span class="toc-number">1.1.2.</span> <span class="toc-text">方案二：在转换成NSDictionary的时候，对后台返回的数据进行校验，把空值转换成NSNull对象。方案可行，但是需要对现有代码做大的改动，每次转换的时候都需要进行校验，太麻烦。业务高速发展时期，这样做成本太高。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。"><span class="toc-number">1.1.3.</span> <span class="toc-text">方案三：有没有一种无须改动现有代码又能解决该问题呢？答案是有的，可以利用Objective-C的runtime来解决该问题。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-2-SIGSEGV-异常"><span class="toc-number">2.</span> <span class="toc-text">杀手 NO.2 SIGSEGV 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-3-NSRangeException-异常"><span class="toc-number">3.</span> <span class="toc-text">杀手 NO.3 NSRangeException 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-4-SIGPIPE-异常"><span class="toc-number">4.</span> <span class="toc-text">杀手 NO.4 SIGPIPE 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手-NO-5-SIGABRT-异常"><span class="toc-number">5.</span> <span class="toc-text">杀手 NO.5 SIGABRT 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀手总结"><span class="toc-number">6.</span> <span class="toc-text">杀手总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章："><span class="toc-number">7.</span> <span class="toc-text">参考文章：</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS-Cocos2d-x/" title="iOS Cocos2d-x">iOS Cocos2d-x<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS入门/" title="iOS入门">iOS入门<sup>41</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/iOS进阶/" title="iOS进阶">iOS进阶<sup>17</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/swift/" title="swift">swift<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/其他/" title="其他">其他<sup>52</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/源码学习分享/" title="源码学习分享">源码学习分享<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/MAC-IOS基础/" title="MAC&amp;&amp;IOS基础">MAC&amp;&amp;IOS基础<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS黑魔法/" title="iOS黑魔法">iOS黑魔法<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS-Cocos2d-x/" title="iOS Cocos2d-x">iOS Cocos2d-x<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cocopods/" title="cocopods">cocopods<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Xcode/" title="Xcode">Xcode<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/runtime/" title="runtime">runtime<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS进阶拓展/" title="iOS进阶拓展">iOS进阶拓展<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HEXO/" title="HEXO">HEXO<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/项目仿写/" title="项目仿写">项目仿写<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/blockKit/" title="blockKit">blockKit<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift基础/" title="swift基础">swift基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS开发/" title="iOS开发">iOS开发<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/控件/" title="控件">控件<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS项目/" title="iOS项目">iOS项目<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Xcode8/" title="Xcode8">Xcode8<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/crash/" title="crash">crash<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/直播/" title="直播">直播<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/p/ee3c96cee9cd" target="_blank" title="个人介绍">个人介绍</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/users/a3ae6d7c68b6/latest_articles" target="_blank" title="香蕉简书">香蕉简书</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+  <!-- /*<p class="asidetitle">微信公众号</p>*/-->
+    	<p align=center size:"16" color="red"><strong>常用工具下载网页</strong></p>
+	</br>
+    <a target="_blank" href="http://xclient.info/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool1.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+  	</br>
+  	<a target="_blank" href="http://www.waitsun.com/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool2.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+
+</div>
+
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+<!--   <p class="asidetitle">微信公众号</p>-->
+  <p align=center size:"16" color="blue"><strong>微信公众号</strong></p>
+  </br>
+    <a target="_blank" href="http://www.jianshu.com/p/ee3c96cee9cd">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/weixin.jpg" alt="Ballade" width=100% height=calc(width)>
+  	</a>
+  	<p align=center>欢迎一起利用碎片时间</br>
+  		学习iOS技术开发
+  	</p>
+</div>
+
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="OneHundredSir" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 成长之路,厚积薄发 <br/>
+			一起成长QQ群:365204530,微信技术公众号:大大家的IOS说</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/6013257513" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/OneHundredSir" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:15507596877@139.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Hundred Wang">Hundred Wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hundredone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260805874'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1260805874' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
