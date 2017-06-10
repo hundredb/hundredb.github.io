@@ -11,49 +11,20 @@
     
 
     
-    <meta name="description" content="关于weak的不小心使用
-前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
-
-发送网络请求,没有收到回馈的信息
-点击事件没有反应
-
-
-正文问题查找的过程
-
-由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
-所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+    <meta name="description" content="关于weak的不小心使用 前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题  发送网络请求,没有收到回馈的信息 点击事件没有反应   正文问题查找的过程  由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了 所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+<meta name="keywords" content="踩坑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于weak的不小心使用">
 <meta property="og:url" content="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于weak的不小心使用/index.html">
 <meta property="og:site_name" content="项目开发小站">
-<meta property="og:description" content="关于weak的不小心使用
-前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
-
-发送网络请求,没有收到回馈的信息
-点击事件没有反应
-
-
-正文问题查找的过程
-
-由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
-所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+<meta property="og:description" content="关于weak的不小心使用 前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题  发送网络请求,没有收到回馈的信息 点击事件没有反应   正文问题查找的过程  由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了 所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
 <meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/Snip20170531_1.png">
 <meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/3.gif">
 <meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/2.gif">
-<meta property="og:updated_time" content="2017-05-31T07:21:04.000Z">
+<meta property="og:updated_time" content="2017-06-07T01:16:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于weak的不小心使用">
-<meta name="twitter:description" content="关于weak的不小心使用
-前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题
-
-发送网络请求,没有收到回馈的信息
-点击事件没有反应
-
-
-正文问题查找的过程
-
-由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了
-所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
+<meta name="twitter:description" content="关于weak的不小心使用 前言由于在ProductCustomInfoViewController里面的vc使用了weak,导致了两个问题  发送网络请求,没有收到回馈的信息 点击事件没有反应   正文问题查找的过程  由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了 所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复">
 <meta name="twitter:image" content="http://okbqg56m9.bkt.clouddn.com/Snip20170531_1.png">
 
     
@@ -184,10 +155,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/07/01/项目进度与会议/自己开发进度/" title="自己开发进度">
+ <a href="/2017/06/01/开发要点/上下拉刷新代码/" title="上下拉刷新代码">
   <strong>上一篇：</strong><br/>
   <span>
-  自己开发进度</span>
+  上下拉刷新代码</span>
 </a>
 </div>
 
@@ -236,13 +207,11 @@
 		  
 		
 		  
-			<li><a href="/categories/组件使用/" title="组件使用">组件使用<sup>8</sup></a></li>
+			<li><a href="/categories/组件使用/" title="组件使用">组件使用<sup>10</sup></a></li>
 		  
 		
 		  
-		
-		  
-			<li><a href="/categories/踩坑/" title="踩坑">踩坑<sup>1</sup></a></li>
+			<li><a href="/categories/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
 		  
 		
 		  
@@ -259,19 +228,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/组件使用/" title="组件使用">组件使用<sup>8</sup></a></li>
+				<li><a href="/tags/组件使用/" title="组件使用">组件使用<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/进度/" title="进度">进度<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/wss会议/" title="wss会议">wss会议<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/踩坑/" title="踩坑">踩坑<sup>1</sup></a></li>
 			
 		
 			
@@ -282,6 +247,8 @@
 				<li><a href="/tags/bug/" title="bug">bug<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/wss会议/" title="wss会议">wss会议<sup>1</sup></a></li>
 			
 		
 		</ul>
