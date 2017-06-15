@@ -1,0 +1,578 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>图片上下传 | 项目开发小站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Hundred Wang">
+    
+
+    
+    <meta name="description" content="图片上下传 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  源码部分主要是网络部分 网络接收12345678910111213141516171819202122232425262">
+<meta name="keywords" content="组件使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片上下传">
+<meta property="og:url" content="http://www.hundredone.win/2017/06/16/开发要点/02图片上下传/index.html">
+<meta property="og:site_name" content="项目开发小站">
+<meta property="og:description" content="图片上下传 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  源码部分主要是网络部分 网络接收12345678910111213141516171819202122232425262">
+<meta property="og:updated_time" content="2017-06-15T01:55:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片上下传">
+<meta name="twitter:description" content="图片上下传 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  源码部分主要是网络部分 网络接收12345678910111213141516171819202122232425262">
+
+    
+    <link rel="alternative" href="/atom.xml" title="项目开发小站" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/fauthor32.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author114.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/author114.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="项目开发小站" title="项目开发小站"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="项目开发小站">项目开发小站</a></h1>
+				<h2 class="blog-motto">项目开发学习小站~一起学习fighting~</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 244624813535589000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/16/开发要点/02图片上下传/" title="图片上下传" itemprop="url">图片上下传</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Hundred Wang" target="_blank" itemprop="author">Hundred Wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-16T02:00:00.000Z" itemprop="datePublished"> 发表于 2017-06-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码部分"><span class="toc-number">2.</span> <span class="toc-text">源码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络接收"><span class="toc-number">2.1.</span> <span class="toc-text">网络接收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片上传的方法"><span class="toc-number">2.2.</span> <span class="toc-text">图片上传的方法</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>图片上下传</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用控件</p>
+<ul>
+<li>主要使用的控件              <code>ImagePictureModuleView</code></li>
+<li>批量的控件(封装在一起了)      <code>SupplementViewController</code></li>
+<li>已经实现的控件,作为参考项     <code>CustomInfoManagerV</code></li>
+</ul>
+<h1 id="源码部分"><a href="#源码部分" class="headerlink" title="源码部分"></a>源码部分</h1><p>主要是网络部分</p>
+<h2 id="网络接收"><a href="#网络接收" class="headerlink" title="网络接收"></a>网络接收</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark - webAction</span></div><div class="line">- (<span class="keyword">void</span>)apiRequestSuccess:(<span class="built_in">NSUInteger</span>)requestKey response:(<span class="built_in">NSDictionary</span> *)response</div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span> (requestKey == WSS_UPLOAD_FILE) &#123;</div><div class="line"><span class="comment">//这里可以获取上传的数据</span></div><div class="line"><span class="comment">//        readKey : Rae2902cf954b443f8268292f341059b9,</span></div><div class="line"><span class="comment">//        fileId : Fc7c3854b588349d584b51dad214a806a</span></div><div class="line"></div><div class="line"><span class="comment">//这里需要做几件事,</span></div><div class="line"><span class="comment">//1.添加已经提交成功的addkey,addkey只能判断每次最新提交的数据</span></div><div class="line"><span class="comment">//2.获取最新的数据内容字典,以备全部上传后一起提交!</span></div><div class="line"><span class="comment">//3. 比较onloading的总数目和添加的数目!</span></div><div class="line">LxDBAnyVar(response);</div><div class="line"><span class="built_in">NSString</span> *readKey = response[<span class="string">@"readKey"</span>];</div><div class="line"><span class="built_in">NSString</span> *fileId = response[<span class="string">@"fileId"</span>];</div><div class="line"></div><div class="line"><span class="comment">//由于提交之后,还没有提交成功,所以目前没有recordID</span></div><div class="line"><span class="comment">//        NSString *recordId = response[@"recordId"];</span></div><div class="line"><span class="comment">//由于下面引用了这个作为下标,所以先这样设计,后期优化!</span></div><div class="line">[<span class="keyword">self</span>.imgaddRecordIds addObject:readKey];</div><div class="line"></div><div class="line"><span class="built_in">NSInteger</span> dicIndex = <span class="keyword">self</span>.imgaddRecordIds.count<span class="number">-1</span>;</div><div class="line"><span class="built_in">NSMutableDictionary</span> *dic = [<span class="keyword">self</span>.onLoadingDicArr[dicIndex] mutableCopy];</div><div class="line">dic[<span class="string">@"readKey"</span>] = readKey;</div><div class="line">dic[<span class="string">@"fileId"</span>] = fileId;</div><div class="line">[<span class="keyword">self</span>.totalAddDicArr addObject:dic];</div><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span>.imgaddRecordIds.count == <span class="keyword">self</span>.onLoadingNum) &#123;</div><div class="line"><span class="comment">//上传已经传好的数据</span></div><div class="line"><span class="built_in">NSString</span> *custNo;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span>.model.personBaseInfo) &#123;</div><div class="line">custNo = <span class="keyword">self</span>.model.personBaseInfo.custNo;</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">self</span>.model.orgBaseInfo)</div><div class="line">&#123;</div><div class="line">custNo = <span class="keyword">self</span>.model.orgBaseInfo.custNo;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (custNo) &#123;</div><div class="line"><span class="built_in">NSDictionary</span> *body = @&#123;<span class="string">@"custFilelistInnerFormList"</span>:<span class="keyword">self</span>.totalAddDicArr,<span class="string">@"custNo"</span>:custNo,<span class="string">@"fileitemType"</span>:@<span class="number">8</span>&#125;;</div><div class="line">[<span class="keyword">self</span> sendPostRequestWithKey:WSS_CUSTOM_DATA_ONLOAD</div><div class="line">params: body</div><div class="line">Session:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line"><span class="comment">//清空上传的数据</span></div><div class="line"><span class="keyword">self</span>.onLoadingDicArr = @[];     <span class="comment">//正在上传的字典</span></div><div class="line"><span class="keyword">self</span>.onLoadingNum = <span class="number">0</span>;          <span class="comment">//正在上传的数目</span></div><div class="line"><span class="keyword">self</span>.totalAddDicArr = [@[] mutableCopy];<span class="comment">//总共完善了的字典!</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span> (requestKey == WSS_CUSTOM_DATA_ONLOAD)</div><div class="line">&#123;</div><div class="line">LxDBAnyVar(response);</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(requestKey == WSS_CUSTOM_DATA_DELETE)</div><div class="line">&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"删除操作情况"</span>);</div><div class="line">LxDBAnyVar(response);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="图片上传的方法"><a href="#图片上传的方法" class="headerlink" title="图片上传的方法"></a>图片上传的方法</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//添加时候进行请求</span></div><div class="line">-(<span class="keyword">void</span>)addAction:(<span class="built_in">NSArray</span>&lt;<span class="built_in">UIImageView</span> *&gt; *)imgVArr</div><div class="line">&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"完成选择数据%@"</span>,imgVArr);</div><div class="line"></div><div class="line"><span class="built_in">NSMutableArray</span> *dicArr = [@[] mutableCopy];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span> ; i&lt;imgVArr.count; i++) &#123;</div><div class="line"><span class="built_in">UIImage</span> *img = imgVArr[i].image;</div><div class="line"><span class="comment">//目前没有获取到umNo</span></div><div class="line">[dicArr addObject:[ConstantOrder onLoadImgDicWithUmNo:<span class="string">@"super_admin"</span> andImg:img]];</div><div class="line">&#125;</div><div class="line"><span class="comment">//这里记录上传的数据数目,待会可以记录下来</span></div><div class="line"><span class="keyword">self</span>.onLoadingDicArr = dicArr;</div><div class="line"><span class="keyword">self</span>.onLoadingNum = imgVArr.count;</div><div class="line">[ConstantOrder postImageToServer:[ConstantOrder imageArrFromImageViewArr:imgVArr] delegate:<span class="keyword">self</span>];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##图片删除操作</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)cancelAction:(<span class="built_in">UIImageView</span> *)img andIndex:(<span class="built_in">NSInteger</span>)index</div><div class="line">&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"删除数据%d"</span>,index);</div><div class="line"><span class="comment">//前半部分的数据量</span></div><div class="line"><span class="built_in">NSInteger</span> oriNum = <span class="keyword">self</span>.imgOriRecordIds.count;</div><div class="line"></div><div class="line"><span class="comment">//这里要判断删除的下标,要分后台添加和之前的,这里的逻辑很简单,就是前面是原始的,后面的一定是添加的,不能打乱!</span></div><div class="line"><span class="built_in">NSString</span> *key ;</div><div class="line"><span class="keyword">if</span> (index&lt;oriNum) &#123;</div><div class="line">key = <span class="keyword">self</span>.imgOriRecordIds[index];</div><div class="line">[<span class="keyword">self</span>.imgOriRecordIds removeObjectAtIndex:index];</div><div class="line"></div><div class="line"><span class="comment">//由于新添加的没有recordID,除非重新请求</span></div><div class="line"><span class="keyword">if</span> (key) &#123;</div><div class="line">[<span class="keyword">self</span> sendPostRequestWithKey:WSS_CUSTOM_DATA_DELETE params:@&#123;<span class="string">@"key"</span>:key&#125; Session:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/组件使用/">组件使用</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/组件使用/">组件使用</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://www.hundredone.win/2017/06/16/开发要点/02图片上下传/" data-title="图片上下传 | 项目开发小站" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/01/项目进度与会议/自己开发进度/" title="自己开发进度">
+  <strong>上一篇：</strong><br/>
+  <span>
+  自己开发进度</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/06/10/开发要点/客户部分开发要点/"  title="客户部分开发要点">
+ <strong>下一篇：</strong><br/> 
+ <span>客户部分开发要点
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/06/16/开发要点/02图片上下传/" data-title="图片上下传" data-url="http://www.hundredone.win/2017/06/16/开发要点/02图片上下传/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码部分"><span class="toc-number">2.</span> <span class="toc-text">源码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络接收"><span class="toc-number">2.1.</span> <span class="toc-text">网络接收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片上传的方法"><span class="toc-number">2.2.</span> <span class="toc-text">图片上传的方法</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/bug/" title="bug">bug<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/wss会议/" title="wss会议">wss会议<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/组件使用/" title="组件使用">组件使用<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进度/" title="进度">进度<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/组件使用/" title="组件使用">组件使用<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进度/" title="进度">进度<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/写死逻辑/" title="写死逻辑">写死逻辑<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/wss会议/" title="wss会议">wss会议<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/p/ee3c96cee9cd" target="_blank" title="个人介绍">个人介绍</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/users/a3ae6d7c68b6/latest_articles" target="_blank" title="香蕉简书">香蕉简书</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+  <!-- /*<p class="asidetitle">微信公众号</p>*/-->
+    	<p align=center size:"16" color="red"><strong>常用工具下载网页</strong></p>
+	</br>
+    <a target="_blank" href="http://xclient.info/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool1.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+  	</br>
+  	<a target="_blank" href="http://www.waitsun.com/">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/tool2.png" alt="Ballade" width=100% height=calc(width)/2>
+  	</a>
+
+</div>
+
+
+  <div >
+<!-- /*这一段写的jisuhi在属性部分,微信栏目*/-->
+<!--   <p class="asidetitle">微信公众号</p>-->
+  <p align=center size:"16" color="blue"><strong>微信公众号</strong></p>
+  </br>
+    <a target="_blank" href="http://www.jianshu.com/p/ee3c96cee9cd">
+		  <img src="https://raw.githubusercontent.com/whjool/whjool.github.io/master/img/weixin.jpg" alt="Ballade" width=100% height=calc(width)>
+  	</a>
+  	<p align=center>欢迎一起利用碎片时间</br>
+  		学习iOS技术开发
+  	</p>
+</div>
+
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="OneHundredSir" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 成长之路,厚积薄发 <br/>
+			一起成长QQ群:365204530,微信技术公众号:大大家的IOS说</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/6013257513" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/OneHundredSir" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:15507596877@139.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Hundred Wang">Hundred Wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"hundredone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260805874'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1260805874' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
