@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="通用123查看跳转的页面关键词:navigationController will push to 6-14 日 设计了临时的判断,完善流程 ProductCustomDetailViewController,好像不需要, 还有就是  6-13 日  开会过下进度,但是不太如意   2.关于下单流程,先选择开放日,输入金额 -&amp;gt;  选择期限,带出收益率,  由于发现空间有不足的地方准备今晚修">
+    <meta name="description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
 <meta name="keywords" content="进度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自己开发进度">
 <meta property="og:url" content="http://www.hundredone.win/2017/07/01/项目进度与会议/自己开发进度/index.html">
 <meta property="og:site_name" content="项目开发小站">
-<meta property="og:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-14 日 设计了临时的判断,完善流程 ProductCustomDetailViewController,好像不需要, 还有就是  6-13 日  开会过下进度,但是不太如意   2.关于下单流程,先选择开放日,输入金额 -&amp;gt;  选择期限,带出收益率,  由于发现空间有不足的地方准备今晚修">
-<meta property="og:updated_time" content="2017-06-14T07:27:00.000Z">
+<meta property="og:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
+<meta property="og:updated_time" content="2017-06-17T04:00:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自己开发进度">
-<meta name="twitter:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-14 日 设计了临时的判断,完善流程 ProductCustomDetailViewController,好像不需要, 还有就是  6-13 日  开会过下进度,但是不太如意   2.关于下单流程,先选择开放日,输入金额 -&amp;gt;  选择期限,带出收益率,  由于发现空间有不足的地方准备今晚修">
+<meta name="twitter:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
 
     
     <link rel="alternative" href="/atom.xml" title="项目开发小站" type="application/atom+xml">
@@ -98,12 +98,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">2.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">3.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">4.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">5.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">6.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">7.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">8.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">9.</span> <span class="toc-text">6-1 日</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">2.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">3.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">4.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">5.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">6.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">7.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">8.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">9.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">10.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">11.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">12.</span> <span class="toc-text">6-1 日</span></a></li></ol>
 		
 		</div>
 		
 		<h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">查看跳转的页面关键词:</div><div class="line"></div><div class="line">navigationController will push <span class="keyword">to</span></div></pre></td></tr></table></figure>
-<h1 id="6-14-日"><a href="#6-14-日" class="headerlink" title="6-14 日"></a>6-14 日</h1><ul>
+<h1 id="6-17-日"><a href="#6-17-日" class="headerlink" title="6-17 日"></a>6-17 日</h1><pre><code>- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程 
+    控制器:`OrderDetailViewController`  
+    页面:`OrderDetailScrollManagerV`
+
+- 修改客户进入个人详情,有两部分,
+    一个是普通的`CustomDetailViewController` 页面: `CustomDetailView`  
+    一个是展示的个人详情`CustomInfoVC` 页面:`CustomInfoManagerV`
+    - 注意,区分准客户和正式客户,准客户和正式客户可以选择收益账户和地址!,但是需要做扩容
+</code></pre><h1 id="6-16-日"><a href="#6-16-日" class="headerlink" title="6-16 日"></a>6-16 日</h1><pre><code>- 完成赎回,
+- 准备开始做订单,订单需要做权限,主要是,分3种状态,
+    1. 订单和收益账户都可以编辑
+    2. 完成的订单这两项都不给编辑
+- 理论实现结果就是编辑后出现提交按钮
+</code></pre><h1 id="6-15-日-完成产品转换和订单下单完成联动"><a href="#6-15-日-完成产品转换和订单下单完成联动" class="headerlink" title="6-15 日 完成产品转换和订单下单完成联动"></a>6-15 日 完成产品转换和订单下单<code>完成联动</code></h1><h1 id="6-14-日"><a href="#6-14-日" class="headerlink" title="6-14 日"></a>6-14 日</h1><ul>
 <li>设计了临时的判断,完善流程 <code>ProductCustomDetailViewController</code>,好像不需要, 还有就是</li>
 </ul>
 <h1 id="6-13-日"><a href="#6-13-日" class="headerlink" title="6-13 日"></a>6-13 日</h1><ul>
@@ -236,7 +249,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">2.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">3.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">4.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">5.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">6.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">7.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">8.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">9.</span> <span class="toc-text">6-1 日</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">2.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">3.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">4.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">5.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">6.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">7.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">8.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">9.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">10.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">11.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">12.</span> <span class="toc-text">6-1 日</span></a></li></ol>
  
   </div>
 
