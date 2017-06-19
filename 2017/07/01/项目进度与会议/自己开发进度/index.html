@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
+    <meta name="description" content="通用123查看跳转的页面关键词:navigationController will push to 6-18 日- 关于客户部分的需求分析,主要是角色分析 赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController//逻辑,先进行`WSS_CUSTOM_STATUS`接口请求一次界面,判断是否正式客户! //再进行请求`WSS_CUSTOM_DETAI">
 <meta name="keywords" content="进度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自己开发进度">
 <meta property="og:url" content="http://www.hundredone.win/2017/07/01/项目进度与会议/自己开发进度/index.html">
 <meta property="og:site_name" content="项目开发小站">
-<meta property="og:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
-<meta property="og:updated_time" content="2017-06-17T04:00:57.000Z">
+<meta property="og:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-18 日- 关于客户部分的需求分析,主要是角色分析 赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController//逻辑,先进行`WSS_CUSTOM_STATUS`接口请求一次界面,判断是否正式客户! //再进行请求`WSS_CUSTOM_DETAI">
+<meta property="og:updated_time" content="2017-06-19T01:17:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自己开发进度">
-<meta name="twitter:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-17 日- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程      控制器:`OrderDetailViewController`       页面:`OrderDetailScrollManagerV`  - 修改客户进入个人详情,有两部分,     一个是普通的`CustomDe">
+<meta name="twitter:description" content="通用123查看跳转的页面关键词:navigationController will push to 6-18 日- 关于客户部分的需求分析,主要是角色分析 赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController//逻辑,先进行`WSS_CUSTOM_STATUS`接口请求一次界面,判断是否正式客户! //再进行请求`WSS_CUSTOM_DETAI">
 
     
     <link rel="alternative" href="/atom.xml" title="项目开发小站" type="application/atom+xml">
@@ -98,12 +98,118 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">2.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">3.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">4.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">5.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">6.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">7.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">8.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">9.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">10.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">11.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">12.</span> <span class="toc-text">6-1 日</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-18-日"><span class="toc-number">2.</span> <span class="toc-text">6-18 日</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#赎回和详情-主要用的类-CustomInfoVC-和-CustomInfoViewController"><span class="toc-number">2.1.</span> <span class="toc-text">赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下单-目前产品转换没有客户详情-ProductCustomDetailViewController"><span class="toc-number">2.2.</span> <span class="toc-text">下单  目前产品转换没有客户详情! ProductCustomDetailViewController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下单选择客户的详情页-产品转换-认购-到期转换"><span class="toc-number">2.3.</span> <span class="toc-text">下单选择客户的详情页 产品转换,认购,到期转换!</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">3.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">4.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">5.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">6.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">7.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">8.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">9.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">10.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">11.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">12.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">13.</span> <span class="toc-text">6-1 日</span></a></li></ol>
 		
 		</div>
 		
 		<h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">查看跳转的页面关键词:</div><div class="line"></div><div class="line">navigationController will push <span class="keyword">to</span></div></pre></td></tr></table></figure>
-<h1 id="6-17-日"><a href="#6-17-日" class="headerlink" title="6-17 日"></a>6-17 日</h1><pre><code>- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程 
+<h1 id="6-18-日"><a href="#6-18-日" class="headerlink" title="6-18 日"></a>6-18 日</h1><pre><code>- 关于客户部分的需求分析,主要是角色分析
+</code></pre><h2 id="赎回和详情-主要用的类-CustomInfoVC-和-CustomInfoViewController"><a href="#赎回和详情-主要用的类-CustomInfoVC-和-CustomInfoViewController" class="headerlink" title="赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController"></a>赎回和详情 主要用的类 <code>CustomInfoVC</code>  和 <code>CustomInfoViewController</code></h2><pre><code>//逻辑,先进行`WSS_CUSTOM_STATUS`接口请求一次界面,判断是否正式客户!
+//再进行请求`WSS_CUSTOM_DETAIL_COMPANY`详情接口!
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">已经有的功能</th>
+<th style="text-align:center">正式客户</th>
+<th style="text-align:center">准客户(没过审核)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">信息修改</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">文件影像</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">专业投资者修改</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">地址</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">受益人</td>
+<td style="text-align:center"><font color="red">是</font></td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">联系人</td>
+<td style="text-align:center"><font color="red">是</font></td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+<p>疑问:是否需要管控,类似赎回邓操作里面的下一步显示与隐藏?</p>
+<h2 id="下单-目前产品转换没有客户详情-ProductCustomDetailViewController"><a href="#下单-目前产品转换没有客户详情-ProductCustomDetailViewController" class="headerlink" title="下单  目前产品转换没有客户详情! ProductCustomDetailViewController"></a>下单  目前产品转换没有客户详情! <code>ProductCustomDetailViewController</code></h2><p>疑问: 是否要在渲染的时候判断客户的类型,还是客户由<br>答案:应该要做判断,如果是非正式可以编辑</p>
+<p>是否有受益人这一项?,目前企业没有受益人一项!</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">已经有的功能</th>
+<th style="text-align:center">正式客户</th>
+<th style="text-align:center">准客户(没过审核)</th>
+<th style="text-align:center">问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">信息修改</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">专业投资者</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">客户经理</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">理财经理</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">风险测评</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">地址</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">联系人</td>
+<td style="text-align:center"><font color="red">是</font></td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">收益账户</td>
+<td style="text-align:center"><font color="red">是</font></td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="下单选择客户的详情页-产品转换-认购-到期转换"><a href="#下单选择客户的详情页-产品转换-认购-到期转换" class="headerlink" title="下单选择客户的详情页 产品转换,认购,到期转换!"></a>下单选择客户的详情页 产品转换,认购,到期转换!</h2><h1 id="6-17-日"><a href="#6-17-日" class="headerlink" title="6-17 日"></a>6-17 日</h1><pre><code>- 开始修改订单详情逻辑,主要是控制订单的操作权限,还有流程 
     控制器:`OrderDetailViewController`  
     页面:`OrderDetailScrollManagerV`
 
@@ -257,7 +363,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">2.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">3.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">4.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">5.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">6.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">7.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">8.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">9.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">10.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">11.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">12.</span> <span class="toc-text">6-1 日</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-number">1.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-18-日"><span class="toc-number">2.</span> <span class="toc-text">6-18 日</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#赎回和详情-主要用的类-CustomInfoVC-和-CustomInfoViewController"><span class="toc-number">2.1.</span> <span class="toc-text">赎回和详情 主要用的类 CustomInfoVC  和 CustomInfoViewController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下单-目前产品转换没有客户详情-ProductCustomDetailViewController"><span class="toc-number">2.2.</span> <span class="toc-text">下单  目前产品转换没有客户详情! ProductCustomDetailViewController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下单选择客户的详情页-产品转换-认购-到期转换"><span class="toc-number">2.3.</span> <span class="toc-text">下单选择客户的详情页 产品转换,认购,到期转换!</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-17-日"><span class="toc-number">3.</span> <span class="toc-text">6-17 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-16-日"><span class="toc-number">4.</span> <span class="toc-text">6-16 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-15-日-完成产品转换和订单下单完成联动"><span class="toc-number">5.</span> <span class="toc-text">6-15 日 完成产品转换和订单下单完成联动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-14-日"><span class="toc-number">6.</span> <span class="toc-text">6-14 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-13-日"><span class="toc-number">7.</span> <span class="toc-text">6-13 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-12-日"><span class="toc-number">8.</span> <span class="toc-text">6-12 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-10-日"><span class="toc-number">9.</span> <span class="toc-text">6-10 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-日"><span class="toc-number">10.</span> <span class="toc-text">6-8 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-7-日"><span class="toc-number">11.</span> <span class="toc-text">6-3-7 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-日"><span class="toc-number">12.</span> <span class="toc-text">6-2 日</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-日"><span class="toc-number">13.</span> <span class="toc-text">6-1 日</span></a></li></ol>
  
   </div>
 
@@ -312,11 +418,11 @@
 			
 		
 			
-				<li><a href="/tags/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
+				<li><a href="/tags/进度/" title="进度">进度<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进度/" title="进度">进度<sup>2</sup></a></li>
+				<li><a href="/tags/踩坑/" title="踩坑">踩坑<sup>2</sup></a></li>
 			
 		
 			
@@ -328,15 +434,15 @@
 			
 		
 			
+				<li><a href="/tags/模块负责情况/" title="模块负责情况">模块负责情况<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/wss会议/" title="wss会议">wss会议<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/需要的账户和数据/" title="需要的账户和数据">需要的账户和数据<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/模块负责情况/" title="模块负责情况">模块负责情况<sup>1</sup></a></li>
 			
 		
 		</ul>
