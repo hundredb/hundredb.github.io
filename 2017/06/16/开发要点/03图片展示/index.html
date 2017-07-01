@@ -4,27 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>关于https不安全协议的设置 | 项目开发小站</title>
+    <title>03图片展示 | 项目开发小站</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Hundred Wang">
     
 
     
-    <meta name="description" content="关于weak的不小心使用 前言由于没有设置安全协议,导致没法访问外网122017-06-08 15:31:55.323024+0800 QHZC[826:135213] [INFO] -[QHBaseViewController apiRequestFailed:error:](524) requestKey:8 error:Error Domain=NSURLErrorDomain Code=-">
-<meta name="keywords" content="踩坑">
+    <meta name="description" content="03图片展示 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  目前涉及到的类1234567891011121314151617181920QHNetwork中的-(void)get">
+<meta name="keywords" content="组件使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于https不安全协议的设置">
-<meta property="og:url" content="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于https不安全协议的设置/index.html">
+<meta property="og:title" content="03图片展示">
+<meta property="og:url" content="http://www.hundredone.win/2017/06/16/开发要点/03图片展示/index.html">
 <meta property="og:site_name" content="项目开发小站">
-<meta property="og:description" content="关于weak的不小心使用 前言由于没有设置安全协议,导致没法访问外网122017-06-08 15:31:55.323024+0800 QHZC[826:135213] [INFO] -[QHBaseViewController apiRequestFailed:error:](524) requestKey:8 error:Error Domain=NSURLErrorDomain Code=-">
-<meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/3.gif">
-<meta property="og:image" content="http://okbqg56m9.bkt.clouddn.com/2.gif">
-<meta property="og:updated_time" content="2017-06-08T07:33:42.000Z">
+<meta property="og:description" content="03图片展示 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  目前涉及到的类1234567891011121314151617181920QHNetwork中的-(void)get">
+<meta property="og:updated_time" content="2017-06-29T03:09:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于https不安全协议的设置">
-<meta name="twitter:description" content="关于weak的不小心使用 前言由于没有设置安全协议,导致没法访问外网122017-06-08 15:31:55.323024+0800 QHZC[826:135213] [INFO] -[QHBaseViewController apiRequestFailed:error:](524) requestKey:8 error:Error Domain=NSURLErrorDomain Code=-">
-<meta name="twitter:image" content="http://okbqg56m9.bkt.clouddn.com/3.gif">
+<meta name="twitter:title" content="03图片展示">
+<meta name="twitter:description" content="03图片展示 前言使用控件  主要使用的控件              ImagePictureModuleView 批量的控件(封装在一起了)      SupplementViewController 已经实现的控件,作为参考项     CustomInfoManagerV  目前涉及到的类1234567891011121314151617181920QHNetwork中的-(void)get">
 
     
     <link rel="alternative" href="/atom.xml" title="项目开发小站" type="application/atom+xml">
@@ -85,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/06/01/自己踩坑的点/关于https不安全协议的设置/" title="关于https不安全协议的设置" itemprop="url">关于https不安全协议的设置</a>
+      <a href="/2017/06/16/开发要点/03图片展示/" title="03图片展示" itemprop="url">03图片展示</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Hundred Wang" target="_blank" itemprop="author">Hundred Wang</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-01T02:00:00.000Z" itemprop="datePublished"> 发表于 2017-06-01</time>
+    <time datetime="2017-06-16T02:00:00.000Z" itemprop="datePublished"> 发表于 2017-06-16</time>
     
   </p>
 </header>
@@ -101,18 +98,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#目前涉及到的类"><span class="toc-number">2.</span> <span class="toc-text">目前涉及到的类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码部分"><span class="toc-number">3.</span> <span class="toc-text">源码部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始来进行批量上下传"><span class="toc-number">4.</span> <span class="toc-text">开始来进行批量上下传</span></a></li></ol>
 		
 		</div>
 		
-		<p>关于weak的不小心使用</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于没有设置安全协议,导致没法访问外网<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">2017-06-08 15:31:55.323024+0800 QHZC[826:135213] [<span class="builtin-name">INFO</span>] -[QHBaseViewController apiRequestFailed<span class="keyword">:error</span>:](524) requestKey:8 error:<span class="builtin-name">Error</span> <span class="attribute">Domain</span>=NSURLErrorDomain <span class="attribute">Code</span>=-1022 <span class="string">"The resource could not be loaded because the App Transport Security policy requires the use of a secure connection."</span> UserInfo=&#123;<span class="attribute">NSUnderlyingError</span>=0x17425c6b0 &#123;<span class="builtin-name">Error</span> <span class="attribute">Domain</span>=kCFErrorDomainCFNetwork <span class="attribute">Code</span>=-1022 <span class="string">"(null)"</span>&#125;, <span class="attribute">NSErrorFailingURLStringKey</span>=http://test.wealth.jushenghua.com:8080/los/wss-intf-portal.updateSession?, <span class="attribute">NSErrorFailingURLKey</span>=http://test.wealth.jushenghua.com:8080/los/wss-intf-portal.updateSession?, <span class="attribute">NSLocalizedDescription</span>=The<span class="built_in"> resource </span>could <span class="keyword">not</span> be loaded because the App Transport Security<span class="built_in"> policy </span>requires the use of a secure connection.&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>问题查找的过程</p>
-<ol>
-<li>由于逐步寻找断点,一直卡在网络请求,但是由于偶然一个原因,点击了一下按钮事件也是消失了</li>
-<li>所以估计是初始化或者全局化没有了,要不就是遮层,遮挡住了,所以这个问题以后要注意,由于粗心复制导致的</li>
-</ol>
-<p><img src="http://okbqg56m9.bkt.clouddn.com/3.gif" alt="使用weak例子"><br><img src="http://okbqg56m9.bkt.clouddn.com/2.gif" alt="使用strong"></p>
+		<p>03图片展示</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用控件</p>
+<ul>
+<li>主要使用的控件              <code>ImagePictureModuleView</code></li>
+<li>批量的控件(封装在一起了)      <code>SupplementViewController</code></li>
+<li>已经实现的控件,作为参考项     <code>CustomInfoManagerV</code></li>
+</ul>
+<h1 id="目前涉及到的类"><a href="#目前涉及到的类" class="headerlink" title="目前涉及到的类"></a>目前涉及到的类</h1><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">QHNetwork</span>中的</div><div class="line"><span class="selector-tag">-</span>(void)<span class="selector-tag">getFileDownLoadWithUrl</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">URLString</span></div><div class="line"><span class="selector-tag">parameters</span><span class="selector-pseudo">:(NSDictionary</span> *)<span class="selector-tag">parameters</span></div><div class="line"><span class="selector-tag">process</span><span class="selector-pseudo">:(QHProcessResponseBlock)process</span></div><div class="line"><span class="selector-tag">success</span><span class="selector-pseudo">:(QHSuccessResponseBlock)success</span></div><div class="line"><span class="selector-tag">failure</span><span class="selector-pseudo">:(QHFailResponseBlock)failure</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">在 <span class="selector-tag">AFHTTPSessionManager</span> 中的下载的方法中有</div><div class="line"></div><div class="line"><span class="selector-tag">-</span> (NSURLSessionDataTask *)<span class="selector-tag">dataTaskWithHTTPMethod</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">method</span></div><div class="line"><span class="selector-tag">URLString</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">URLString</span></div><div class="line"><span class="selector-tag">parameters</span><span class="selector-pseudo">:(id)parameters</span></div><div class="line"><span class="selector-tag">uploadProgress</span><span class="selector-pseudo">:(nullable</span> <span class="selector-tag">void</span> (^)(NSProgress *uploadProgress)) <span class="selector-tag">uploadProgress</span></div><div class="line"><span class="selector-tag">downloadProgress</span><span class="selector-pseudo">:(nullable</span> <span class="selector-tag">void</span> (^)(NSProgress *downloadProgress)) <span class="selector-tag">downloadProgress</span></div><div class="line"><span class="selector-tag">success</span><span class="selector-pseudo">:(void</span> (^)(NSURLSessionDataTask *, id))<span class="selector-tag">success</span></div><div class="line"><span class="selector-tag">failure</span><span class="selector-pseudo">:(void</span> (^)(NSURLSessionDataTask *, NSError *))<span class="selector-tag">failure</span></div><div class="line"></div><div class="line"><span class="selector-attr">[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"]</span>;</div></pre></td></tr></table></figure>
+<h1 id="源码部分"><a href="#源码部分" class="headerlink" title="源码部分"></a>源码部分</h1><p>目前设计采用的是sdWebimage,但是出现一个问题,就是访问的时候没有看到数据展示<br>怀疑问题,可能没有添加contentType</p>
+<p>对比一下报文的差别<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<h1 id="开始来进行批量上下传"><a href="#开始来进行批量上下传" class="headerlink" title="开始来进行批量上下传"></a>开始来进行批量上下传</h1><p>OrderDetailViewController</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,13 +120,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/踩坑/">踩坑</a>
+  <a class="article-category-link" href="/categories/组件使用/">组件使用</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/踩坑/">踩坑</a>
+  <span></span> <a href="/tags/组件使用/">组件使用</a>
   </div>
 
 </div>
@@ -135,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于https不安全协议的设置/" data-title="关于https不安全协议的设置 | 项目开发小站" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.hundredone.win/2017/06/16/开发要点/03图片展示/" data-title="03图片展示 | 项目开发小站" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -149,18 +149,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/06/01/自己踩坑的点/关于weak的不小心使用/" title="关于weak的不小心使用">
+ <a href="/2017/06/16/开发要点/02图片上下传/" title="图片上下传">
   <strong>上一篇：</strong><br/>
   <span>
-  关于weak的不小心使用</span>
+  图片上下传</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/31/开发要点/订单部分开发要点/"  title="managerCell组件的使用">
+<a href="/2017/06/10/开发要点/客户部分开发要点/"  title="客户部分开发要点">
  <strong>下一篇：</strong><br/> 
- <span>managerCell组件的使用
+ <span>客户部分开发要点
 </span>
 </a>
 </div>
@@ -169,7 +169,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/06/01/自己踩坑的点/关于https不安全协议的设置/" data-title="关于https不安全协议的设置" data-url="http://www.hundredone.win/2017/06/01/自己踩坑的点/关于https不安全协议的设置/"></div>
+	<div class="ds-thread" data-thread-key="2017/06/16/开发要点/03图片展示/" data-title="03图片展示" data-url="http://www.hundredone.win/2017/06/16/开发要点/03图片展示/"></div>
 </section>
 
 
@@ -179,7 +179,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#目前涉及到的类"><span class="toc-number">2.</span> <span class="toc-text">目前涉及到的类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码部分"><span class="toc-number">3.</span> <span class="toc-text">源码部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始来进行批量上下传"><span class="toc-number">4.</span> <span class="toc-text">开始来进行批量上下传</span></a></li></ol>
  
   </div>
 
